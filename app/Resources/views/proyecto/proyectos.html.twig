@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Proyectos</h1>
+    {% for proyecto in proyectos %}
+        <h1>Proyecto {{ proyecto.nombre}}</h1>
+    {% endfor %}
+    <div style="height: 200px"></div>
+{% endblock %}

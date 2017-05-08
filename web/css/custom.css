@@ -19,3 +19,20 @@
 .margin-bottom-lg {
     margin-bottom: 30px;
 }
+.registerbtn{
+    margin: 0 auto;
+}
+.loginbtn{
+    margin: 0 auto;
+}
+
+h1{
+    margin:5% !important;
+}
+
+button.btn-primary.registerbtn.registerbtn > a {
+    text-decoration: none !important;
+}
+button.btn-primary.loginbtn > a {
+    text-decoration: none !important;
+}
