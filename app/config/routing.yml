@@ -9,3 +9,8 @@ app.proyecto:
     resource: "@AppBundle/Controller/ProyectoController.php"
     type: annotation
     prefix: /proyectos
+
+app.planificacion:
+    resource: "@AppBundle/Controller/PlanificacionController.php"
+    type: annotation
+    prefix: /planificaciones
