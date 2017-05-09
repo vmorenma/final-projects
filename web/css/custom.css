@@ -51,11 +51,12 @@ html, body{
     padding-right: 0px !important;
     height: 100% !important;
 }
-.menu-vertical .sidebar-nav {
-    border:none !important;
-}
 .sin-bordes{
     border:0;
+}
+
+.menu-vertical li.menu-item:hover{
+    background-color: #080808;
 }
 
 /* make sidebar nav vertical */
