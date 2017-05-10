@@ -88,3 +88,6 @@ html, body{
         padding-bottom: 12px;
     }
 }
+form {
+    display: block !important;
+}

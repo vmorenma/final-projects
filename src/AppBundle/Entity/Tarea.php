@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Planificacion
+ * Tarea
  *
- * @ORM\Table(name="planificacion")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanificacionRepository")
+ * @ORM\Table(name="tarea")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TareaRepository")
  */
-class Planificacion
+class Tarea
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Planificacion
     /**
      * @var string
      *
-     * @ORM\Column(name="Name", type="string", length=255)
+     * @ORM\Column(name="Nombre", type="string", length=255)
      */
     private $nombre;
 
@@ -36,11 +36,18 @@ class Planificacion
     private $descripcion;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="Categoria", type="string", length=255)
+     * @ORM\Column(name="startDate", type="time")
      */
-    private $categoria;
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endDate", type="time")
+     */
+    private $endDate;
 
     /**
      * @var \DateTime
@@ -56,14 +63,6 @@ class Planificacion
      */
     private $updatedAt;
 
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = $this->createdAt;
-
-    }
-
-
 
     /**
      * Get id
@@ -76,6 +75,22 @@ class Planificacion
     }
 
     /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return Tarea
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
      * @return string
      */
     public function getNombre()
@@ -84,21 +99,11 @@ class Planificacion
     }
 
     /**
-     * @param string $nombre
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-
-
-    /**
      * Set descripcion
      *
      * @param string $descripcion
      *
-     * @return Planificacion
+     * @return Tarea
      */
     public function setDescripcion($descripcion)
     {
@@ -118,27 +123,51 @@ class Planificacion
     }
 
     /**
-     * Set categoria
+     * Set startDate
      *
-     * @param string $categoria
+     * @param \DateTime $startDate
      *
-     * @return Planificacion
+     * @return Tarea
      */
-    public function setCategoria($categoria)
+    public function setStartDate($startDate)
     {
-        $this->categoria = $categoria;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     /**
-     * Get categoria
+     * Get startDate
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getCategoria()
+    public function getStartDate()
     {
-        return $this->categoria;
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     *
+     * @return Tarea
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
     }
 
     /**
@@ -146,7 +175,7 @@ class Planificacion
      *
      * @param \DateTime $createdAt
      *
-     * @return Planificacion
+     * @return Tarea
      */
     public function setCreatedAt($createdAt)
     {
@@ -170,7 +199,7 @@ class Planificacion
      *
      * @param \DateTime $updatedAt
      *
-     * @return Planificacion
+     * @return Tarea
      */
     public function setUpdatedAt($updatedAt)
     {

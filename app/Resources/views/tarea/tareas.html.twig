@@ -1,0 +1,8 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Tareas</h1>
+    {% for tarea in tareas %}
+        <h1>Tarea {{ tarea.nombre}}</h1>
+    {% endfor %}
+{% endblock %}

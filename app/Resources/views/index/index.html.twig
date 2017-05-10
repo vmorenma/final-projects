@@ -37,8 +37,12 @@
                 Himalaya Project
             </h1>
             <hr>
-            <button class = "btn-primary loginbtn"><a href="/login">Iniciar Sesión</a></button>
-            <button class = "btn-primary registerbtn"><a  href="/register">Registro</a></button>
+            {% if (app.user == null) %}
+                <a href="{{ path('app_proyecto_index') }}"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
+            {% else %}
+            <a href="/login"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
+            <a  href="/register"><button class = "btn-primary registerbtn">Registro</button></a>
+            {% endif %}
             <hr/>
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
                 ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
@@ -51,7 +55,7 @@
 
         <div class="product-blocks row">
             <div class="block columns four block-1">
-                <h5>Titulo del bloque</h5>
+                <h5>Título del bloque</h5>
                 <img src="images/one.jpg" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p>
@@ -60,7 +64,7 @@
             </div>
 
             <div class="block columns four block-2">
-                <h5>Titulo del bloque</h5>
+                <h5>Título del bloque</h5>
                 <img src="images/two.jpg" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p>
@@ -69,7 +73,7 @@
             </div>
 
             <div class="block columns four block-3">
-                <h5>Titulo del bloque</h5>
+                <h5>Título del bloque</h5>
                 <img src="images/three.jpg" alt="">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p>
