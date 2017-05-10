@@ -52,6 +52,17 @@ html, body{
     height: 100% !important;
     position:fixed;
 }
+.top-right-icon{
+    position: absolute;
+    top:0;
+    right:-5px;
+}
+.delete:hover{
+    color: red;
+}
+.edit:hover{
+    color: blue;
+}
 .sin-bordes{
     border:0;
 }

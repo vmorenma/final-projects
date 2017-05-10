@@ -15,7 +15,10 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        return $this->render(':index:index.html.twig');
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->render(':index:index.html.twig');
+        }
+        return $this ->redirectToRoute('app_proyecto_index');
     }
 
     /**

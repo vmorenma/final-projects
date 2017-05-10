@@ -172,9 +172,9 @@ class Planificacion
      *
      * @return Planificacion
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();;
 
         return $this;
     }

@@ -37,12 +37,8 @@
                 Himalaya Project
             </h1>
             <hr>
-            {% if (app.user == null) %}
-                <a href="{{ path('app_proyecto_index') }}"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
-            {% else %}
             <a href="/login"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
             <a  href="/register"><button class = "btn-primary registerbtn">Registro</button></a>
-            {% endif %}
             <hr/>
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
                 ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent

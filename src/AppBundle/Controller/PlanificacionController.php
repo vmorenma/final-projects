@@ -62,5 +62,58 @@ class PlanificacionController extends Controller
             ]
         );
     }
+    /**
+     * @Route("/editar/{id}", name="app_planificacion_editar")
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    public function editarAction($id, Request $request)
+    {
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('AppBundle:Planificacion');
+        $plan= $repo->find($id);
+        $form=$this->createForm(PlanificacionType::class,$plan);
+
+        //El producto es actualizado con los estos datos
+        $form->handleRequest($request);
+        $plan->setUpdatedAt();
+
+        if($form->isValid()){
+            $m->flush();
+
+            return $this->redirectToRoute('app_planificacion_index');
+        }
+
+        return $this->render(':planificacion:form.html.twig',
+            [
+                'form'=> $form->createView(),
+                'action'=> $this->generateUrl('app_planificacion_editar',['id'=>$id]),
+            ]
+
+        );
+
+    }
+    /**
+     * @Route("/borrar/{id}", name="app_planificacion_borrar")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function borrarAction($id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('AppBundle:Planificacion');
+        $planificacion = $repo->find($id);
+        //$creator= $planificacion->getCreador().$id;
+        //$current = $this->getUser().$id;
+        //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+        //    throw $this->createAccessDeniedException();
+        //}
+        $m->remove($planificacion);
+        $m->flush();
+
+        return $this->redirectToRoute('app_planificacion_index');
+    }
 
 }

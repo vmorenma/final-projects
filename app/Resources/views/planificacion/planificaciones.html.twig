@@ -5,6 +5,9 @@
     <div class="container col-sm-12">
     {% for planificacion in planificaciones %}
         <div class="col-sm-3 col-sm-offset-1">
+
+            <a href="{{ path('app_planificacion_editar', {'id': planificacion.id}) }}" class=" top-right-icon " style="margin-right:9% !important;"><span class = "btn edit"> <i class="glyphicon glyphicon-edit"></i> </span></a>
+            <a href="{{ path('app_planificacion_borrar', {'id': planificacion.id}) }}" class=" top-right-icon "><span class = "btn delete"> <i class="glyphicon glyphicon-remove"></i> </span></a>
             <p>{{ planificacion.nombre}}</p>
             <p>{{ planificacion.descripcion}}</p>
             <p>{{ planificacion.categoria}}</p>
