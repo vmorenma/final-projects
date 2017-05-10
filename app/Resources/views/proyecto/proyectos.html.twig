@@ -3,8 +3,11 @@
 {% block body %}
     <h1>Proyectos</h1>
     {% for proyecto in proyectos %}
-        <p>{{ proyecto.nombre}}</p>
-        <p>{{ proyecto.descripcion}}</p>
-        <p>{{ proyecto.categoria}}</p>
+        <div>
+            <p>{{ proyecto.nombre}}</p>
+            <p>{{ proyecto.descripcion}}</p>
+            <p>{{ proyecto.categoria}}</p>
+        </div>
+
     {% endfor %}
 {% endblock %}

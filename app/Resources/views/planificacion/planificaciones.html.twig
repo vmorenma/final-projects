@@ -3,7 +3,11 @@
 {% block body %}
     <h1>Planificaciones</h1>
     {% for planificacion in planificaciones %}
-        <h1>Planificacion para {{ planificacion.nombre}}</h1>
+        <div>
+            <p>{{ planificacion.nombre}}</p>
+            <p>{{ planificacion.descripcion}}</p>
+            <p>{{ planificacion.categoria}}</p>
+        </div>
     {% endfor %}
     <div style="height: 200px"></div>
 {% endblock %}
