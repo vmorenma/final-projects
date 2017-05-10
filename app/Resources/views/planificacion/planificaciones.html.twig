@@ -1,13 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>Planificaciones</h1>
+    <h1>Planificaciones<a href="{{ path('app_planificacion_nueva') }}" style="margin-left:5% !important;"><button class="btn btn-primary"> Añadir </button></a></h1>
+    <div class="container col-sm-12">
     {% for planificacion in planificaciones %}
-        <div>
+        <div class="col-sm-3 col-sm-offset-1">
             <p>{{ planificacion.nombre}}</p>
             <p>{{ planificacion.descripcion}}</p>
             <p>{{ planificacion.categoria}}</p>
         </div>
     {% endfor %}
+    </div>
     <div style="height: 200px"></div>
 {% endblock %}

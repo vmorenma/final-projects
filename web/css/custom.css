@@ -50,6 +50,7 @@ html, body{
     padding-left: 0px !important;
     padding-right: 0px !important;
     height: 100% !important;
+    position:fixed;
 }
 .sin-bordes{
     border:0;
