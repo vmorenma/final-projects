@@ -1,6 +1,13 @@
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+
 app.index:
     resource: "@AppBundle/Controller/IndexController.php"
     type: annotation
@@ -19,3 +26,10 @@ app.tarea:
     resource: "@AppBundle/Controller/TareaController.php"
     type: annotation
     prefix: /tareas
+
+app.calendario:
+    resource: "@AppBundle/Controller/CalendarioController.php"
+    type: annotation
+    prefix: /calendario
+
+
