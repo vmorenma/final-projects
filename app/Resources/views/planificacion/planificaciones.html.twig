@@ -8,9 +8,10 @@
 
             <a href="{{ path('app_planificacion_editar', {'id': planificacion.id}) }}" class=" top-right-icon btn edit" style="margin-right:15% !important;"> <i class="glyphicon glyphicon-edit"></i></a>
             <a href="{{ path('app_planificacion_borrar', {'id': planificacion.id}) }}" class=" top-right-icon btn delete"><i class="glyphicon glyphicon-remove"></i></a>
-            <p>{{ planificacion.nombre}}</p>
-            <p>{{ planificacion.descripcion}}</p>
-            <p>{{ planificacion.categoria}}</p>
+            <a href="{{ path('app_planificacion_mostrar', {'id': planificacion.id}) }}"><p>{{ planificacion.nombre}}</p></a>
+            <p>Descripción: {{ planificacion.descripcion}}</p>
+            <p>Categoria: {{ planificacion.categoria}}</p>
+            <p>Creador: {{ planificacion.creador}}</p>
         </div>
     {% endfor %}
     </div>

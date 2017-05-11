@@ -44,6 +44,12 @@ class User extends BaseUser
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Planificacion",mappedBy="creador")
+     */
+
+    private $planificacionesCreadas;
+
     public function __construct()
     {
         parent::__construct();
@@ -65,6 +71,22 @@ class User extends BaseUser
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanificacionesCreadas()
+    {
+        return $this->planificacionesCreadas;
+    }
+
+    /**
+     * @param mixed $planificacionesCreadas
+     */
+    public function setPlanificacionesCreadas($planificacionesCreadas)
+    {
+        $this->planificacionesCreadas = $planificacionesCreadas;
     }
 
     /**

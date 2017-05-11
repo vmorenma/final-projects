@@ -55,6 +55,14 @@ class Planificacion
      * @ORM\Column(name="updatedAt", type="time")
      */
     private $updatedAt;
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="planificacionesCreadas")
+     */
+    private $creador;
+
+    /**
+     * Planificacion constructor.
+     */
 
     public function __construct()
     {
@@ -188,5 +196,23 @@ class Planificacion
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreador()
+    {
+        return $this->creador;
+    }
+
+    /**
+     * @param mixed $creador
+     */
+    public function setCreador($creador)
+    {
+        $this->creador = $creador;
+    }
+
+
 }
 

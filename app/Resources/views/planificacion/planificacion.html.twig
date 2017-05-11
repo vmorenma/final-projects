@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+{% block headTitle %}{{ planificacion.nombre }}{% endblock %}
+{% block body %}
+    <h1>
+        Planificacion para el proyecto {{ planificacion.nombre }}
+    </h1>
+    <div class="col-sm-offset-1 col-sm-10">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Descripción</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Tareas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab">Equipo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Calendario</a>
+            </li>
+        </ul>
+        <div class = "jumbotron" style="padding: 7%;">
+        <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel">
+                    <p>Nombre: {{ planificacion.nombre }}</p>
+                    <p>Descripción: {{ planificacion.descripcion }}</p>
+                    <p>Categoria: {{ planificacion.categoria }}</p>
+                </div>
+                <div class="tab-pane" id="profile" role="tabpanel">2</div>
+                <div class="tab-pane" id="messages" role="tabpanel">
+                    <a href="#"> Nombre del empleado</a>
+                </div>
+                <div class="tab-pane" id="settings" role="tabpanel">4</div>
+                <hr/>
+                <div style="float:right">
+                    <button class="btn btn-success"> Acceptar planificación</button>
+                    <button class="btn btn-danger"> Rechazar planificación</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

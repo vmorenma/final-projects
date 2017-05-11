@@ -44,7 +44,7 @@ class PlanificacionController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         //set creador
-        //$pla->setCreador($user);
+        $pla->setCreador($user);
 
         $form = $this->createForm(PlanificacionType::class,$pla);
         $form->handleRequest($request);
@@ -114,6 +114,18 @@ class PlanificacionController extends Controller
         $m->flush();
 
         return $this->redirectToRoute('app_planificacion_index');
+    }
+    /**
+     * @Route("/mostrar/{id}", name="app_planificacion_mostrar")
+     */
+    public function showAction($id)
+    {
+        $m = $this->getDoctrine()->getManager();
+        $repository= $m->getRepository('AppBundle:Planificacion');
+        $planificacion=$repository->find($id);
+        return $this->render(':planificacion:planificacion.html.twig', [
+            'planificacion'   => $planificacion,
+        ]);
     }
 
 }
