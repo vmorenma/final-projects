@@ -61,11 +61,18 @@ class Planificacion
     private $creador;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="planificacion")
+     */
+    private $tareas;
+
+
+    /**
      * Planificacion constructor.
      */
 
     public function __construct()
     {
+        $this->tareas = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 
@@ -211,6 +218,22 @@ class Planificacion
     public function setCreador($creador)
     {
         $this->creador = $creador;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
+    }
+
+    /**
+     * @param mixed $tareas
+     */
+    public function setTareas($tareas)
+    {
+        $this->tareas = $tareas;
     }
 
 

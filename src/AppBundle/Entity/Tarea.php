@@ -63,6 +63,11 @@ class Tarea
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Tarea", inversedBy="tareas")
+     */
+    private $planificacion;
+
 
     /**
      * Get id
@@ -217,5 +222,22 @@ class Tarea
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanificacion()
+    {
+        return $this->planificacion;
+    }
+
+    /**
+     * @param mixed $planificacion
+     */
+    public function setPlanificacion($planificacion)
+    {
+        $this->planificacion = $planificacion;
+    }
+
 }
 
