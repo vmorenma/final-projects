@@ -108,6 +108,18 @@ html, body{
 .tab-panels .panel.active {
     display:block;
 }
+
+.preview{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+.project-margin{
+    margin-right: 2%;
+}
+.container-margin{
+    margin-left: 5%;
+}
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
     .sidebar-nav .navbar .navbar-collapse {

@@ -2,14 +2,17 @@
 
 {% block body %}
     <h1>Planificaciones<a href="{{ path('app_planificacion_nueva') }}" style="margin-left:5% !important;"><button class="btn btn-primary"> Añadir </button></a></h1>
-    <div class="container col-sm-12">
+    <div class="container-fluid container-margin">
     {% for planificacion in planificaciones %}
-        <div class="col-sm-3 col-sm-offset-1">
-
+        <div class="col-sm-3  thumbnail project-margin" >
+            <a href="{{ path('app_planificacion_mostrar', {'id': planificacion.id}) }}"><p style="font-size: 1.5em;padding:2%">{{ planificacion.nombre}}</p></a>
+            <a class="thumbnail" href="{{ path('app_planificacion_mostrar', {'id': planificacion.id}) }}"><img src="{{ asset('images/planificacion_default.jpg') }}"/></a>
             <a href="{{ path('app_planificacion_editar', {'id': planificacion.id}) }}" class=" top-right-icon btn edit" style="margin-right:15% !important;"> <i class="glyphicon glyphicon-edit"></i></a>
             <a href="{{ path('app_planificacion_borrar', {'id': planificacion.id}) }}" class=" top-right-icon btn delete"><i class="glyphicon glyphicon-remove"></i></a>
-            <a href="{{ path('app_planificacion_mostrar', {'id': planificacion.id}) }}"><p>{{ planificacion.nombre}}</p></a>
-            <p>Descripción: {{ planificacion.descripcion}}</p>
+            <hr>
+            <h5><strong>Información de la planificación: </strong></h5>
+            <hr>
+            <p class="preview">Descripción: {{ planificacion.descripcion}}</p>
             <p>Categoria: {{ planificacion.categoria}}</p>
             <p>Creador: <a href="{{ path('app_perfil_mostrar',{'id': planificacion.creador.id}) }}">{{ planificacion.creador}}</a></p>
         </div>

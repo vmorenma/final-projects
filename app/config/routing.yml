@@ -37,4 +37,9 @@ app.perfil:
     type: annotation
     prefix: /perfil
 
+app.notificacion:
+    resource: "@AppBundle/Controller/NotificacionController.php"
+    type: annotation
+    prefix: /notificaciones
+
 
