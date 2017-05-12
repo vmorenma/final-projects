@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Perfil de {{ usuario.username }}</h1>
+    <div class="container col-sm-12">
+
+        <div class="col-sm-6 col-lg-4 col-sm-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-thumbnail"><img src="{{ asset('images/perfil.png') }}" style="padding-top:10px;padding-left:10px" class="img-responsive"></div>
+                <hr>
+                <div class="panel-body">
+                    <p class="lead">{{ usuario.username }}</p>
+                    <h5><strong style="margin-bottom: 4%;">Información del usuario: </strong></h5>
+                    <p>Nombre de usuario: {{ usuario.username }}</p>
+                    <p>Email : {{ usuario.email }}</p>
+                    <p>Fecha de registro : {{ usuario.createdAt|date('Y-m-d')  }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-7">
+            <div class = "jumbotron" style="padding: 7%;">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#descripcion" role="tab">Descripción</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tareas" role="tab">Tareas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#equipo" role="tab">Equipo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#calendario" role="tab">Calendario</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="descripcion" role="tabpanel">
+                        <p>Nombre: </p>
+                        <p>Descripción: </p>
+                        <p>Categoria:</p>
+                    </div>
+                    <div class="tab-pane" id="tareas" role="tabpanel">
+                        2
+                    </div>
+                    <div class="tab-pane" id="equipo" role="tabpanel">
+                        3
+                    </div>
+                    <div class="tab-pane" id="calendario" role="tabpanel">
+                        4
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 200px"></div>
+{% endblock %}

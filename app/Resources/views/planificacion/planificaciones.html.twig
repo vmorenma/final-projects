@@ -11,7 +11,7 @@
             <a href="{{ path('app_planificacion_mostrar', {'id': planificacion.id}) }}"><p>{{ planificacion.nombre}}</p></a>
             <p>Descripción: {{ planificacion.descripcion}}</p>
             <p>Categoria: {{ planificacion.categoria}}</p>
-            <p>Creador: {{ planificacion.creador}}</p>
+            <p>Creador: <a href="{{ path('app_perfil_mostrar',{'id': planificacion.creador.id}) }}">{{ planificacion.creador}}</a></p>
         </div>
     {% endfor %}
     </div>

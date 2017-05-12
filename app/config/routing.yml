@@ -32,4 +32,9 @@ app.calendario:
     type: annotation
     prefix: /calendario
 
+app.perfil:
+    resource: "@AppBundle/Controller/PerfilController.php"
+    type: annotation
+    prefix: /perfil
+
 
