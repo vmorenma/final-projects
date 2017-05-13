@@ -50,10 +50,18 @@ class Tarea
     private $endDate;
 
     /**
+     * @var int
+     *
+     *@ORM\Column(name="coste", type="integer")
+     */
+    private $coste;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="time")
      */
+
     private $createdAt;
 
     /**
@@ -238,6 +246,23 @@ class Tarea
     {
         $this->planificacion = $planificacion;
     }
+
+    /**
+     * @return int
+     */
+    public function getCoste()
+    {
+        return $this->coste;
+    }
+
+    /**
+     * @param int $coste
+     */
+    public function setCoste($coste)
+    {
+        $this->coste = $coste;
+    }
+
 
 }
 

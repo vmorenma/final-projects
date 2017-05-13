@@ -8,6 +8,9 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#documentos" role="tab">Documentos</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#descripcion" role="tab">Descripción</a>
             </li>
             <li class="nav-item">
@@ -23,13 +26,16 @@
         <div class = "jumbotron" style="padding: 7%;">
         <!-- Tab panes -->
             <div class="tab-content">
+                <div class="tab-pane active" id="documentos" role="tabpanel">
+
+                </div>
                 <div class="tab-pane active" id="descripcion" role="tabpanel">
                     <p>Nombre: {{ planificacion.nombre }}</p>
                     <p>Descripción: {{ planificacion.descripcion }}</p>
                     <p>Categoria: {{ planificacion.categoria }}</p>
                 </div>
                 <div class="tab-pane" id="tareas" role="tabpanel">
-                    <h2>Tareas<a href="{{ path('app_planificacion_nueva') }}" style="margin-left:5% !important;"><button class="btn btn-primary"> Añadir </button></a></h2>
+                    <h2>Tareas<a href="{{ path('app_tarea_nueva',{'id':planificacion.id}) }}" style="margin-left:5% !important;"><button class="btn btn-primary"> Añadir </button></a></h2>
                     <hr>
                     <h2>No hay tareas assignadas a este proyecto</h2>
 
