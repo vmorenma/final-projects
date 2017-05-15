@@ -57,10 +57,22 @@ class Tarea
     private $coste;
 
     /**
+     * @var bool
+     * @ORM\Column(name="completada", type="boolean")
+     */
+    private $completada;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="tareasassignadas")
+     */
+    private $assignado;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="time")
      */
+
 
     private $createdAt;
 
@@ -72,9 +84,23 @@ class Tarea
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Tarea", inversedBy="tareas")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Proyecto", inversedBy="tareas")
      */
-    private $planificacion;
+    private $proyecto;
+
+
+
+    /**
+     * Tarea constructor.
+     */
+
+    public function __construct()
+    {
+        $this->completada = false;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = $this->createdAt;
+
+    }
 
 
     /**
@@ -262,6 +288,55 @@ class Tarea
     {
         $this->coste = $coste;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProyecto()
+    {
+        return $this->proyecto;
+    }
+
+    /**
+     * @param mixed $proyecto
+     */
+    public function setProyecto($proyecto)
+    {
+        $this->proyecto = $proyecto;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCompletada()
+    {
+        return $this->completada;
+    }
+
+    /**
+     * @param mixed $completada
+     */
+    public function setCompletada($completada)
+    {
+        $this->completada = $completada;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAssignado()
+    {
+        return $this->assignado;
+    }
+
+    /**
+     * @param mixed $assignado
+     */
+    public function setAssignado($assignado)
+    {
+        $this->assignado = $assignado;
+    }
+
 
 
 }

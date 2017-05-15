@@ -1,8 +1,27 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>Tareas</h1>
-    {% for tarea in tareas %}
-        <h1>Tarea {{ tarea.nombre}}</h1>
-    {% endfor %}
+    <h1>Tareas que te han assignado</h1>
+    <div class="jumbotron">
+        <div class="container-fluid">
+            <h2>Tareas</h2>
+            {% if tareas|length == 0 %}
+                <h2>No hay tareas assignadas a este proyecto</h2>
+            {% endif %}
+            {% for tarea in tareas %}
+                <div style="padding: 8px" class="col-sm-3 col-sm-offset-1">
+                Tarea: {{ tarea.nombre}}
+                <br>
+                Completada:
+                {% if tarea.completada %}
+                    <input type="checkbox" checked/>
+                {% else %}
+                    <input type="checkbox"/>
+                {% endif %}
+                <br>
+                Fecha fin: {{ tarea.endDate |date('Y-m-d')}}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

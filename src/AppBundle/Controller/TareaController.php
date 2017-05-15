@@ -20,6 +20,9 @@ class TareaController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
         $m = $this->getDoctrine()->getManager();
         $repo=$m->getRepository('AppBundle:Tarea');
         $tareas = $repo->findAll();
@@ -42,17 +45,17 @@ class TareaController extends Controller
             throw $this->createAccessDeniedException();
         }
         $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Planificacion');
-        $plan = $repo->find($id);
-        //set planification
-        $tarea->setPlanificacion($plan);
+        $repo = $m->getRepository('AppBundle:Proyecto');
+        $p = $repo->find($id);
+        //set proyecto
+        $tarea->setProyecto($p);
         $form = $this->createForm(TareaType::class,$tarea);
         $form->handleRequest($request);
         if($form->isValid()){
 
             $m->persist($tarea);
             $m->flush();
-            return $this ->redirectToRoute('app_perfil_mostrar',['id'=>$id]);
+            return $this ->redirectToRoute('app_proyecto_mostrar',['id'=>$id]);
 
         }
         return $this->render('tarea/form.html.twig',

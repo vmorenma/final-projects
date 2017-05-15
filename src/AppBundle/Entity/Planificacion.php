@@ -190,7 +190,7 @@ class Planificacion
      */
     public function setUpdatedAt()
     {
-        $this->updatedAt = new \DateTime();;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

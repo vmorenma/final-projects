@@ -149,3 +149,12 @@ html, body{
 form {
     display: block !important;
 }
+
+.perfil-tabs{
+    text-align: center;
+    margin-top: 5% !important;
+}
+
+.margen-iz{
+    margin-left:5% !important;
+}

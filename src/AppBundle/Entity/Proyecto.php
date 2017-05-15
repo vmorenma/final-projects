@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Proyecto
@@ -55,9 +56,27 @@ class Proyecto
      * @ORM\Column(name="updatedAt", type="time")
      */
     private $updatedAt;
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="proyectosCreados")
+     */
+    private $autor;
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea" , mappedBy="proyecto")
+     */
+    private $tareas;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="proyectos")
+     */
+    private $equipo;
+    /**
+     * Proyecto constructor.
+     */
 
     public function __construct()
     {
+        $this->equipo = new ArrayCollection();
+        $this->tareas = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 
@@ -177,9 +196,9 @@ class Proyecto
      *
      * @return Proyecto
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -193,5 +212,63 @@ class Proyecto
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAutor()
+    {
+        return $this->autor;
+    }
+
+    /**
+     * @param mixed $autor
+     */
+    public function setAutor($autor)
+    {
+        $this->autor = $autor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
+    }
+
+    /**
+     * @param mixed $tareas
+     */
+    public function setTareas($tareas)
+    {
+        $this->tareas = $tareas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEquipo()
+    {
+        return $this->equipo;
+    }
+
+    /**
+     * @param mixed $equipo
+     */
+    public function setEquipo($equipo)
+    {
+        $this->equipo = $equipo;
+    }
+
+    /**
+     * @param mixed $persona
+     */
+    public function asignarAEquipo($persona)
+    {
+        $this->equipo->add($persona);
+    }
+
+
 }
 

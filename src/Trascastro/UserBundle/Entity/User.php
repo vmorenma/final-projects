@@ -50,6 +50,28 @@ class User extends BaseUser
 
     private $planificacionesCreadas;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proyecto",mappedBy="autor")
+     */
+
+    private $proyectosCreados;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="assignado")
+     */
+    private $tareasassignadas;
+
+    /**
+     * @ORM\ManyToMany (targetEntity="AppBundle\Entity\Proyecto", inversedBy="equipo")
+     */
+    private $proyectos;
+
+    /**
+     * User constructor.
+     */
+
+
+
     public function __construct()
     {
         parent::__construct();
@@ -116,4 +138,59 @@ class User extends BaseUser
     {
         return $this->username;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProyectosCreados()
+    {
+        return $this->proyectosCreados;
+    }
+
+    /**
+     * @param mixed $proyectosCreados
+     */
+    public function setProyectosCreados($proyectosCreados)
+    {
+        $this->proyectosCreados = $proyectosCreados;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTareasassignadas()
+    {
+        return $this->tareasassignadas;
+    }
+
+    /**
+     * @param mixed $tareasassignadas
+     */
+    public function setTareasassignadas($tareasassignadas)
+    {
+        $this->tareasassignadas = $tareasassignadas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProyectos()
+    {
+        return $this->proyectos;
+    }
+
+    /**
+     * @param mixed $proyectos
+     */
+    public function setProyectos($proyectos)
+    {
+        $this->proyectos = $proyectos;
+    }
+
+    public function addToProyectos($proyecto){
+        $this->proyectos->add($proyecto);
+    }
+
+
+
 }
