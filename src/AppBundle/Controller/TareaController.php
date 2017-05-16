@@ -26,6 +26,8 @@ class TareaController extends Controller
         $m = $this->getDoctrine()->getManager();
         $repo=$m->getRepository('AppBundle:Tarea');
         $tareas = $repo->findAll();
+        $tarea = $repo->find();
+        $tarea->setCompletada(true);
 
         return $this->render(':tarea:tareas.html.twig',
             [

@@ -85,7 +85,7 @@ class ProyectoController extends Controller
         if($form->isValid()){
             $m->flush();
 
-            return $this->redirectToRoute('app_proyecto_index');
+            return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$id]);
         }
 
         return $this->render(':proyecto:form.html.twig',
@@ -110,6 +110,7 @@ class ProyectoController extends Controller
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Proyecto');
         $p = $repo->find($id);
+
         //$creator= $planificacion->getCreador().$id;
         //$current = $this->getUser().$id;
         //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {

@@ -158,3 +158,9 @@ form {
 .margen-iz{
     margin-left:5% !important;
 }
+
+input[type='checkbox'] {
+    width:30px !important;
+    height:30px !important;
+    margin-top: 60%;
+}

@@ -61,7 +61,7 @@ class Proyecto
      */
     private $autor;
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea" , mappedBy="proyecto")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea" , mappedBy="proyecto", cascade={"remove"})
      */
     private $tareas;
 

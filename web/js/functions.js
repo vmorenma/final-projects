@@ -26,6 +26,11 @@ $(window).scroll(function(){
 
 });
 
+$('a#calendario').click(function(e){
+
+    $("a#calendario").children().show();
+});
+
 
 
 

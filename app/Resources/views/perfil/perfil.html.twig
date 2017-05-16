@@ -22,8 +22,8 @@
             <div class = "jumbotron" style="padding: 7%;">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#proyectos" role="tab">Proyectos creados</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" data-toggle="tab" href="#proyectos" role="tab">Proyectos creados</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#tareas" role="tab">Tareas</a>
@@ -40,7 +40,7 @@
                     <div class="tab-pane active" id="proyectos" role="tabpanel">
                         <div class="container-fluid">
                         {% for proyecto in usuario.proyectosCreados %}
-                            <div class="col-sm-3  thumbnail project-margin" >
+                            <div class="col-sm-5  thumbnail project-margin" >
                                 <a href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><p style="font-size: 1.5em;padding:2%">{{ proyecto.nombre}}</p></a>
                                 <a class="thumbnail" href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><img src="{{ asset('images/planificacion_default.jpg') }}"/></a>
                                 <p class="preview">Descripción: {{ proyecto.descripcion}}</p>
