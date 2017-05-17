@@ -238,5 +238,28 @@ class Planificacion
     }
 
 
-}
 
+    /**
+     * Add tarea
+     *
+     * @param \AppBundle\Entity\Tarea $tarea
+     *
+     * @return Planificacion
+     */
+    public function addTarea(\AppBundle\Entity\Tarea $tarea)
+    {
+        $this->tareas[] = $tarea;
+
+        return $this;
+    }
+
+    /**
+     * Remove tarea
+     *
+     * @param \AppBundle\Entity\Tarea $tarea
+     */
+    public function removeTarea(\AppBundle\Entity\Tarea $tarea)
+    {
+        $this->tareas->removeElement($tarea);
+    }
+}

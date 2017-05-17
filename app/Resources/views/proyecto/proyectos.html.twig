@@ -4,7 +4,7 @@
     <h1>Proyectos<a href="{{ path('app_proyecto_nuevo') }}" style="margin-left:5% !important;"><button class="btn btn-primary"> Añadir </button></a></h1>
     <div class="container-fluid container-margin">
         {% for proyecto in proyectos %}
-            <div class="col-sm-3  thumbnail project-margin" >
+            <div class="col-sm-12 col-md-5 col-lg-3  thumbnail project-margin" >
                 <a href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><p style="font-size: 1.5em;padding:2%">{{ proyecto.nombre}}</p></a>
                 <a class="thumbnail" href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><img src="{{ asset('images/planificacion_default.jpg') }}"/></a>
                 <a href="{{ path('app_proyecto_editar', {'id': proyecto.id}) }}" class=" top-right-icon btn edit" style="margin-right:15% !important;"> <i class="glyphicon glyphicon-edit"></i></a>

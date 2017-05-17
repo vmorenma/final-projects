@@ -3,15 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Proyecto
+ * Tarea
  *
- * @ORM\Table(name="proyecto")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProyectoRepository")
+ * @ORM\Table(name="tarea")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TareaRepository")
  */
-class Proyecto
+class Tarea
 {
     /**
      * @var int
@@ -37,17 +36,44 @@ class Proyecto
     private $descripcion;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="Categoria", type="string", length=255)
+     * @ORM\Column(name="startDate", type="time")
      */
-    private $categoria;
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endDate", type="time")
+     */
+    private $endDate;
+
+    /**
+     * @var int
+     *
+     *@ORM\Column(name="coste", type="integer")
+     */
+    private $coste;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="completada", type="boolean")
+     */
+    private $completada;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="tareasassignadas")
+     */
+    private $assignado;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="time")
      */
+
+
     private $createdAt;
 
     /**
@@ -56,27 +82,21 @@ class Proyecto
      * @ORM\Column(name="updatedAt", type="time")
      */
     private $updatedAt;
-    /**
-     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="proyectosCreados")
-     */
-    private $autor;
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea" , mappedBy="proyecto", cascade={"remove"})
-     */
-    private $tareas;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="proyectos")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Proyecto", inversedBy="tareas")
      */
-    private $equipo;
+    private $proyecto;
+
+
+
     /**
-     * Proyecto constructor.
+     * Tarea constructor.
      */
 
     public function __construct()
     {
-        $this->equipo = new ArrayCollection();
-        $this->tareas = new ArrayCollection();
+        $this->completada = false;
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 
@@ -98,7 +118,7 @@ class Proyecto
      *
      * @param string $nombre
      *
-     * @return Proyecto
+     * @return Tarea
      */
     public function setNombre($nombre)
     {
@@ -122,7 +142,7 @@ class Proyecto
      *
      * @param string $descripcion
      *
-     * @return Proyecto
+     * @return Tarea
      */
     public function setDescripcion($descripcion)
     {
@@ -142,27 +162,51 @@ class Proyecto
     }
 
     /**
-     * Set categoria
+     * Set startDate
      *
-     * @param string $categoria
+     * @param \DateTime $startDate
      *
-     * @return Proyecto
+     * @return Tarea
      */
-    public function setCategoria($categoria)
+    public function setStartDate($startDate)
     {
-        $this->categoria = $categoria;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     /**
-     * Get categoria
+     * Get startDate
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getCategoria()
+    public function getStartDate()
     {
-        return $this->categoria;
+        return $this->startDate;
+    }
+
+    /**
+     * Set endDate
+     *
+     * @param \DateTime $endDate
+     *
+     * @return Tarea
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
     }
 
     /**
@@ -170,7 +214,7 @@ class Proyecto
      *
      * @param \DateTime $createdAt
      *
-     * @return Proyecto
+     * @return Tarea
      */
     public function setCreatedAt($createdAt)
     {
@@ -194,11 +238,11 @@ class Proyecto
      *
      * @param \DateTime $updatedAt
      *
-     * @return Proyecto
+     * @return Tarea
      */
-    public function setUpdatedAt()
+    public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -216,106 +260,84 @@ class Proyecto
     /**
      * @return mixed
      */
-    public function getAutor()
+    public function getPlanificacion()
     {
-        return $this->autor;
+        return $this->planificacion;
     }
 
     /**
-     * @param mixed $autor
+     * @param mixed $planificacion
      */
-    public function setAutor($autor)
+    public function setPlanificacion($planificacion)
     {
-        $this->autor = $autor;
+        $this->planificacion = $planificacion;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCoste()
+    {
+        return $this->coste;
+    }
+
+    /**
+     * @param int $coste
+     */
+    public function setCoste($coste)
+    {
+        $this->coste = $coste;
     }
 
     /**
      * @return mixed
      */
-    public function getTareas()
+    public function getProyecto()
     {
-        return $this->tareas;
+        return $this->proyecto;
     }
 
     /**
-     * @param mixed $tareas
+     * @param mixed $proyecto
      */
-    public function setTareas($tareas)
+    public function setProyecto($proyecto)
     {
-        $this->tareas = $tareas;
+        $this->proyecto = $proyecto;
     }
 
     /**
      * @return mixed
      */
-    public function getEquipo()
+    public function getCompletada()
     {
-        return $this->equipo;
+        return $this->completada;
     }
 
     /**
-     * @param mixed $equipo
+     * @param mixed $completada
      */
-    public function setEquipo($equipo)
+    public function setCompletada($completada)
     {
-        $this->equipo = $equipo;
+        $this->completada = $completada;
     }
 
     /**
-     * @param mixed $persona
+     * @return mixed
      */
-    public function asignarAEquipo($persona)
+    public function getAssignado()
     {
-        $this->equipo->add($persona);
-    }
-
-
-
-    /**
-     * Add tarea
-     *
-     * @param \AppBundle\Entity\Tarea $tarea
-     *
-     * @return Proyecto
-     */
-    public function addTarea(\AppBundle\Entity\Tarea $tarea)
-    {
-        $this->tareas[] = $tarea;
-
-        return $this;
+        return $this->assignado;
     }
 
     /**
-     * Remove tarea
-     *
-     * @param \AppBundle\Entity\Tarea $tarea
+     * @param mixed $assignado
      */
-    public function removeTarea(\AppBundle\Entity\Tarea $tarea)
+    public function setAssignado($assignado)
     {
-        $this->tareas->removeElement($tarea);
+        $this->assignado = $assignado;
     }
 
-    /**
-     * Add equipo
-     *
-     * @param \Trascastro\UserBundle\Entity\User $equipo
-     *
-     * @return Proyecto
-     */
-    public function addEquipo(\Trascastro\UserBundle\Entity\User $equipo)
-    {
-        $this->equipo[] = $equipo;
 
-        return $this;
-    }
 
-    /**
-     * Remove equipo
-     *
-     * @param \Trascastro\UserBundle\Entity\User $equipo
-     */
-    public function removeEquipo(\Trascastro\UserBundle\Entity\User $equipo)
-    {
-        $this->equipo->removeElement($equipo);
-    }
 }
+

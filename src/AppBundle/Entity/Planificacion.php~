@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Proyecto
+ * Planificacion
  *
- * @ORM\Table(name="proyecto")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ProyectoRepository")
+ * @ORM\Table(name="planificacion")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlanificacionRepository")
  */
-class Proyecto
+class Planificacion
 {
     /**
      * @var int
@@ -25,7 +25,7 @@ class Proyecto
     /**
      * @var string
      *
-     * @ORM\Column(name="Nombre", type="string", length=255)
+     * @ORM\Column(name="Name", type="string", length=255)
      */
     private $nombre;
 
@@ -57,30 +57,28 @@ class Proyecto
      */
     private $updatedAt;
     /**
-     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="proyectosCreados")
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="planificacionesCreadas")
      */
-    private $autor;
+    private $creador;
+
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea" , mappedBy="proyecto", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="planificacion")
      */
     private $tareas;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="proyectos")
-     */
-    private $equipo;
-    /**
-     * Proyecto constructor.
+     * Planificacion constructor.
      */
 
     public function __construct()
     {
-        $this->equipo = new ArrayCollection();
         $this->tareas = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 
     }
+
 
 
     /**
@@ -94,22 +92,6 @@ class Proyecto
     }
 
     /**
-     * Set nombre
-     *
-     * @param string $nombre
-     *
-     * @return Proyecto
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
      * @return string
      */
     public function getNombre()
@@ -118,11 +100,21 @@ class Proyecto
     }
 
     /**
+     * @param string $nombre
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+
+
+    /**
      * Set descripcion
      *
      * @param string $descripcion
      *
-     * @return Proyecto
+     * @return Planificacion
      */
     public function setDescripcion($descripcion)
     {
@@ -146,7 +138,7 @@ class Proyecto
      *
      * @param string $categoria
      *
-     * @return Proyecto
+     * @return Planificacion
      */
     public function setCategoria($categoria)
     {
@@ -170,7 +162,7 @@ class Proyecto
      *
      * @param \DateTime $createdAt
      *
-     * @return Proyecto
+     * @return Planificacion
      */
     public function setCreatedAt($createdAt)
     {
@@ -194,7 +186,7 @@ class Proyecto
      *
      * @param \DateTime $updatedAt
      *
-     * @return Proyecto
+     * @return Planificacion
      */
     public function setUpdatedAt()
     {
@@ -216,17 +208,17 @@ class Proyecto
     /**
      * @return mixed
      */
-    public function getAutor()
+    public function getCreador()
     {
-        return $this->autor;
+        return $this->creador;
     }
 
     /**
-     * @param mixed $autor
+     * @param mixed $creador
      */
-    public function setAutor($autor)
+    public function setCreador($creador)
     {
-        $this->autor = $autor;
+        $this->creador = $creador;
     }
 
     /**
@@ -245,77 +237,6 @@ class Proyecto
         $this->tareas = $tareas;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEquipo()
-    {
-        return $this->equipo;
-    }
 
-    /**
-     * @param mixed $equipo
-     */
-    public function setEquipo($equipo)
-    {
-        $this->equipo = $equipo;
-    }
-
-    /**
-     * @param mixed $persona
-     */
-    public function asignarAEquipo($persona)
-    {
-        $this->equipo->add($persona);
-    }
-
-
-
-    /**
-     * Add tarea
-     *
-     * @param \AppBundle\Entity\Tarea $tarea
-     *
-     * @return Proyecto
-     */
-    public function addTarea(\AppBundle\Entity\Tarea $tarea)
-    {
-        $this->tareas[] = $tarea;
-
-        return $this;
-    }
-
-    /**
-     * Remove tarea
-     *
-     * @param \AppBundle\Entity\Tarea $tarea
-     */
-    public function removeTarea(\AppBundle\Entity\Tarea $tarea)
-    {
-        $this->tareas->removeElement($tarea);
-    }
-
-    /**
-     * Add equipo
-     *
-     * @param \Trascastro\UserBundle\Entity\User $equipo
-     *
-     * @return Proyecto
-     */
-    public function addEquipo(\Trascastro\UserBundle\Entity\User $equipo)
-    {
-        $this->equipo[] = $equipo;
-
-        return $this;
-    }
-
-    /**
-     * Remove equipo
-     *
-     * @param \Trascastro\UserBundle\Entity\User $equipo
-     */
-    public function removeEquipo(\Trascastro\UserBundle\Entity\User $equipo)
-    {
-        $this->equipo->removeElement($equipo);
-    }
 }
+

@@ -38,14 +38,14 @@ class Tarea
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="time")
+     * @ORM\Column(name="startDate", type="date")
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endDate", type="time")
+     * @ORM\Column(name="endDate", type="date")
      */
     private $endDate;
 
@@ -340,4 +340,3 @@ class Tarea
 
 
 }
-

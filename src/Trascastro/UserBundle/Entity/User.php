@@ -67,6 +67,20 @@ class User extends BaseUser
     private $proyectos;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="misContactos")
+     **/
+    private $contactosConmigo;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="contactosConmigo")
+     * @ORM\JoinTable(name="contactos",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="contacto_user_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $misContactos;
+
+    /**
      * User constructor.
      */
 
@@ -75,7 +89,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-
+        $this->contactosConmigo = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->misContactos = new \Doctrine\Common\Collections\ArrayCollection();
         $this->createdAt    = new \DateTime();
         $this->updatedAt    = $this->createdAt;
     }
@@ -189,6 +204,38 @@ class User extends BaseUser
 
     public function addToProyectos($proyecto){
         $this->proyectos->add($proyecto);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContactosConmigo()
+    {
+        return $this->contactosConmigo;
+    }
+
+    /**
+     * @param mixed $contactosConmigo
+     */
+    public function setContactosConmigo($contactosConmigo)
+    {
+        $this->contactosConmigo = $contactosConmigo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMisContactos()
+    {
+        return $this->misContactos;
+    }
+
+    /**
+     * @param mixed $misContactos
+     */
+    public function setMisContactos($misContactos)
+    {
+        $this->misContactos = $misContactos;
     }
 
 

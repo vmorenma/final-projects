@@ -7,14 +7,23 @@
         <div class="col-sm-4 col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-thumbnail"><img src="{{ asset('images/perfil.png') }}" style="margin:0 auto" class="img-responsive"></div>
+                {% if (app.user.username != usuario.username)  %}
+                    {% if not added %}
+                        <div style="text-align: center">
+                            <a href="#">
+                                <button>Añadir contacto</button>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                {% endif %}
                 <hr>
                 <div class="panel-body">
-                    <p class="lead">{{ usuario.username }}</p>
+                    <p class="lead">{{ usuario.username }} </p>
                     <h5><strong style="margin-bottom: 4%;">Información del usuario: </strong></h5>
                     <p>Nombre de usuario: {{ usuario.username }}</p>
                     <p>Email : {{ usuario.email }}</p>
                     <p>Fecha de registro : {{ usuario.createdAt|date('Y-m-d')  }}</p>
-
                 </div>
             </div>
         </div>
@@ -78,6 +87,8 @@
                             {% if true %}
                                 <h2>Ningun contacto añadido.</h2>
                             {% endif %}
+
+
 
 
                         </div>

@@ -270,52 +270,5 @@ class Proyecto
     }
 
 
-
-    /**
-     * Add tarea
-     *
-     * @param \AppBundle\Entity\Tarea $tarea
-     *
-     * @return Proyecto
-     */
-    public function addTarea(\AppBundle\Entity\Tarea $tarea)
-    {
-        $this->tareas[] = $tarea;
-
-        return $this;
-    }
-
-    /**
-     * Remove tarea
-     *
-     * @param \AppBundle\Entity\Tarea $tarea
-     */
-    public function removeTarea(\AppBundle\Entity\Tarea $tarea)
-    {
-        $this->tareas->removeElement($tarea);
-    }
-
-    /**
-     * Add equipo
-     *
-     * @param \Trascastro\UserBundle\Entity\User $equipo
-     *
-     * @return Proyecto
-     */
-    public function addEquipo(\Trascastro\UserBundle\Entity\User $equipo)
-    {
-        $this->equipo[] = $equipo;
-
-        return $this;
-    }
-
-    /**
-     * Remove equipo
-     *
-     * @param \Trascastro\UserBundle\Entity\User $equipo
-     */
-    public function removeEquipo(\Trascastro\UserBundle\Entity\User $equipo)
-    {
-        $this->equipo->removeElement($equipo);
-    }
 }
+
