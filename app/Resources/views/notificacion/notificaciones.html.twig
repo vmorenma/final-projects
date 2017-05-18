@@ -4,7 +4,10 @@
     <h1>Notificaciones</h1>
     <div class="media">
         {% if (notificaciones|length == 0) %}
-            <h2>Todo al día no tienes notificaciones, de momento...</h2>
+            <div class="col-sm-offset-1">
+                <h3>Todo al día no tienes notificaciones, de momento...</h3>
+            </div>
+
         {% else %}
 
             {% for n in notificaciones %}
