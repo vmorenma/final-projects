@@ -23,7 +23,7 @@
 
                 {% if n.motivo == 1 %}
                     <div style="float:right">
-                        <a href="{{ path('app_notificacion_acceptar', {'id': n.id}) }}"><button>Aceptar</button></a>
+                        <a href="{{ path('app_notificacion_aceptar', {'id': n.id}) }}"><button>Aceptar</button></a>
 
                         <a href="{{ path('app_notificacion_borrar', {'id': n.id}) }}">
                             <button>Rechazar</button>

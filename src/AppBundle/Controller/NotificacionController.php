@@ -53,10 +53,10 @@ class NotificacionController extends Controller
         return $this->redirectToRoute('app_notificacion_index');
     }
     /**
-     * @Route("/acceptar/{id}", name="app_notificacion_acceptar")
+     * @Route("/acceptar/{id}", name="app_notificacion_aceptar")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function acceptarAction($id)
+    public function aceptarAction($id)
     {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
