@@ -17,11 +17,6 @@ app.proyecto:
     type: annotation
     prefix: /proyectos
 
-app.planificacion:
-    resource: "@AppBundle/Controller/PlanificacionController.php"
-    type: annotation
-    prefix: /planificaciones
-
 app.tarea:
     resource: "@AppBundle/Controller/TareaController.php"
     type: annotation
