@@ -2,9 +2,9 @@
 
 {% block body %}
     <h1>Perfil de {{ usuario.username }}</h1>
-    <div class="container-fluid col-sm-12">
+    <div class="container-fluid col-md-12">
 
-        <div class="col-sm-4 col-lg-3">
+        <div class="col-sm-12 col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-thumbnail"><img src="{{ asset('images/perfil.png') }}" style="margin:0 auto" class="img-responsive"></div>
                 {% if (app.user.username != usuario.username)  %}
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-lg-8">
+        <div class="col-sm-12 col-lg-8">
             <div class = "jumbotron" style="padding: 7%;">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
