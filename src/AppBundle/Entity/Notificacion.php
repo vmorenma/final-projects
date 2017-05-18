@@ -24,9 +24,15 @@ class Notificacion
     /**
      * @var int
      *
-     * @ORM\Column(name="Motivo", type="integer")
+     * @ORM\Column(name="motivo", type="integer")
      */
     private $motivo;
+
+    /**
+     * @var string
+     * @ORM\Column(name="nota", type="text")
+     */
+    private $nota;
 
     /**
      * @var \DateTime
@@ -41,6 +47,25 @@ class Notificacion
      * @ORM\Column(name="updatedAt", type="time")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="notificacionesCreadas")
+     */
+    private $sender;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="notificacionesRecibidas")
+     */
+    private $target;
+
+    /**
+     * Notificacion constructor.
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = $this->createdAt;
+    }
 
 
     /**
@@ -108,9 +133,9 @@ class Notificacion
      *
      * @return Notificacion
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }
@@ -124,5 +149,56 @@ class Notificacion
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    /**
+     * @param mixed $sender
+     */
+    public function setSender($sender)
+    {
+        $this->sender = $sender;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param mixed $target
+     */
+    public function setTarget($target)
+    {
+        $this->target = $target;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNota()
+    {
+        return $this->nota;
+    }
+
+    /**
+     * @param mixed $nota
+     */
+    public function setNota($nota)
+    {
+        $this->nota = $nota;
+    }
+
+
+
 }
 

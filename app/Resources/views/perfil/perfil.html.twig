@@ -10,7 +10,7 @@
                 {% if (app.user.username != usuario.username)  %}
                     {% if not added %}
                         <div style="text-align: center">
-                            <a href="#">
+                            <a href="{{ path('app_perfil_notificacion', {'id': usuario.id}) }}">
                                 <button>Añadir contacto</button>
                             </a>
                         </div>
@@ -83,9 +83,13 @@
                         <div class="container">
                             <h3 style="text-align: left"> Contactos</h3>
                             <hr>
-                            <!-- usuario.tareasassignadas|length == 0 -->
-                            {% if true %}
+                            <!-- usuario.MisContactos|length == 0 -->
+                            {% if usuario.MisContactos|length == 0 %}
                                 <h2>Ningun contacto añadido.</h2>
+                            {% else %}
+                                {% for c in usuario.MisContactos %}
+                                    {{ c.username }}
+                                {% endfor %}
                             {% endif %}
 
 

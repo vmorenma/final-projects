@@ -81,6 +81,16 @@ class User extends BaseUser
     private $misContactos;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notificacion", mappedBy="sender")
+     */
+    private $notificacionesCreadas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notificacion", mappedBy="target")
+     */
+    private $notificacionesRecibidas;
+
+    /**
      * User constructor.
      */
 
@@ -236,6 +246,38 @@ class User extends BaseUser
     public function setMisContactos($misContactos)
     {
         $this->misContactos = $misContactos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotificacionesCreadas()
+    {
+        return $this->notificacionesCreadas;
+    }
+
+    /**
+     * @param mixed $notificacionesCreadas
+     */
+    public function setNotificacionesCreadas($notificacionesCreadas)
+    {
+        $this->notificacionesCreadas = $notificacionesCreadas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotificacionesRecibidas()
+    {
+        return $this->notificacionesRecibidas;
+    }
+
+    /**
+     * @param mixed $notificacionesRecibidas
+     */
+    public function setNotificacionesRecibidas($notificacionesRecibidas)
+    {
+        $this->notificacionesRecibidas = $notificacionesRecibidas;
     }
 
 
