@@ -37,60 +37,92 @@
                 Himalaya Project
             </h1>
             <hr>
-            <a href="/login"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
-            <a  href="/register"><button class = "btn-primary registerbtn">Registro</button></a>
-            <hr/>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Expetenda tincidunt in sed, ex partem placerat sea, porro commodo ex eam. His putant aeterno interesset at. Usu ea mundi tincidunt, omnium virtute aliquando ius ex.
-                Ea aperiri sententiae duo. Usu nullam dolorum quaestio ei, sit vidit facilisis ea. Per ne impedit iracundia neglegentur. Consetetur neglegentur eum ut, vis animal legimus inimicus id. His audiam deserunt in, eum ubique voluptatibus
-                te.
+            <p>Nuestra aplicación Web te ayuda a ti y tu equipo a estar organizado
+                y al día con todas las tareas que componen un proyecto.
+                Con multitud de funciones esta herramienta és la solución perfecta que tu negocio necesita.
             </p>
             <hr>
+            <a href="/login"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
+            <a  href="/register"><button class = "btn-primary registerbtn">Registro</button></a>
         </article>
 
         <div class="product-blocks row">
-            <div class="block columns four block-1">
-                <h5>Título del bloque</h5>
-                <img class="paralax_img" src="images/one.jpg" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <p>
-                    <a href="" class="button">Leer más</a>
-                </p>
-            </div>
-
-            <div class="block columns four block-2">
-                <h5>Título del bloque</h5>
-                <img class="paralax_img" src="images/two.jpg" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <p>
-                    <a href="" class="button">Leer más</a>
-                </p>
-            </div>
-
-            <div class="block columns four block-3">
-                <h5>Título del bloque</h5>
+            <div class="rectangle block columns four block-1">
+                <h5>Organización de tareas</h5>
                 <img class="paralax_img" src="images/three.jpg" alt="">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>Mantente a ti y  tu equipo organizado con una avanzada lista de tareas para llevar a cabo tu proyecto con resultados profesionales.</p>
                 <p>
-                    <a href="" class="button">Leer más</a>
+                    <a href="#tareas" class="button">Leer más</a>
+                </p>
+            </div>
+
+            <div class=" rectangle block columns four block-2">
+                <h5>Colabora con tu equipo</h5>
+                <img class="paralax_img" src="images/two.jpg" alt="">
+                <p>Trabaja de forma eficiente, en conjunto con tu equipo para hacer las entregas a tiempo con resultados de primera.</p>
+                <p>
+                    <a href="#equipo" class="button">Leer más</a>
+                </p>
+            </div>
+
+            <div class="rectangle block columns four block-3">
+                <h5>Control de tiempo</h5>
+                <img class="paralax_img" src="images/one.jpg" alt="">
+                <p>Lleva el control de cada minuto que dedicas a tus proyectos para mostrar a tus clientes el esfuerzo que conlleva este proyecto.</p>
+                <p>
+                    <a href="#tiempo" class="button">Leer más</a>
                 </p>
             </div>
 
         </div>
-        <article>
+        <article></article>
+        <article id="tareas">
             <h1>
-                Himalaya Project
+                Organización de tareas
             </h1>
-            <hr>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Expetenda tincidunt in sed, ex partem placerat sea, porro commodo ex eam. His putant aeterno interesset at. Usu ea mundi tincidunt, omnium virtute aliquando ius ex.
-                Ea aperiri sententiae duo. Usu nullam dolorum quaestio ei, sit vidit facilisis ea. Per ne impedit iracundia neglegentur. Consetetur neglegentur eum ut, vis animal legimus inimicus id. His audiam deserunt in, eum ubique voluptatibus
-                te.
+        </article>
+        <div>
+            <p>
+                Mantente al día con las tareas que se te asignan y que asignas, mientras lidias con múltiples proyectos.
+                Cada proyecto tiene lista de tareas, archivos , mensajes para fomentar el trabajo en equipo y costes de
+                producción.
             </p>
             <hr>
+            <img src="{{ asset('images/edificio.jpg') }}" width="100%"/>
+        </div>
+
+        <hr>
+
+
+        <article id="equipo">
+            <h1>
+                Colabora con tu equipo.
+            </h1>
         </article>
+            <p>
+                La comunicación és lo que construye o destruye cada uno de los proyecto.
+                Esta aplicación esta pensada para facilitar la comunicación entre las personas de un mismo equipo
+                y mantener-las concentradas con un mismo fin.
+            </p>
+            <hr>
+            <img src="{{ asset('images/empresa.jpg') }}" width="100%"/>
+
+
+        <article id="tiempo">
+            <h1>
+                Control del tiempo.
+            </h1>
+        </article>
+            <p>
+                Como ya saben el tiempo es oro y por lo tanto es de suma importancia llevar el recuento de la cantidad
+                de horas dedicadas a un proyecto y a cada una de las tareas que se asignan a este .
+                Con nuestra aplicación web podrás llevar el recuento y cobrar a tu cliente de forma correspondiente.
+            </p>
+            <hr>
+            <img src="{{ asset('images/tiempo.jpg') }}" width="100%"/>
+
+        <article></article>
+
 
 
 
