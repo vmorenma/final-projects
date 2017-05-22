@@ -258,22 +258,6 @@ class Tarea
     }
 
     /**
-     * @return mixed
-     */
-    public function getPlanificacion()
-    {
-        return $this->planificacion;
-    }
-
-    /**
-     * @param mixed $planificacion
-     */
-    public function setPlanificacion($planificacion)
-    {
-        $this->planificacion = $planificacion;
-    }
-
-    /**
      * @return int
      */
     public function getCoste()

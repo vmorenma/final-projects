@@ -45,16 +45,15 @@ class User extends BaseUser
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Planificacion",mappedBy="creador")
-     */
-
-    private $planificacionesCreadas;
-
-    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proyecto",mappedBy="autor")
      */
 
     private $proyectosCreados;
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Mensaje",mappedBy="autorMensaje")
+     */
+
+    private $mensajesCreados;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="assignado")
@@ -118,22 +117,6 @@ class User extends BaseUser
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPlanificacionesCreadas()
-    {
-        return $this->planificacionesCreadas;
-    }
-
-    /**
-     * @param mixed $planificacionesCreadas
-     */
-    public function setPlanificacionesCreadas($planificacionesCreadas)
-    {
-        $this->planificacionesCreadas = $planificacionesCreadas;
     }
 
     /**
@@ -278,6 +261,22 @@ class User extends BaseUser
     public function setNotificacionesRecibidas($notificacionesRecibidas)
     {
         $this->notificacionesRecibidas = $notificacionesRecibidas;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMensajesCreados()
+    {
+        return $this->mensajesCreados;
+    }
+
+    /**
+     * @param mixed $mensajesCreados
+     */
+    public function setMensajesCreados($mensajesCreados)
+    {
+        $this->mensajesCreados = $mensajesCreados;
     }
 
 

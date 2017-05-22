@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="proyecto")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProyectoRepository")
+ *
  */
 class Proyecto
 {
@@ -69,6 +70,12 @@ class Proyecto
      * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", mappedBy="proyectos")
      */
     private $equipo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Mensaje", mappedBy="proyecto", cascade={"remove"})
+     */
+    private $mensajes;
+
     /**
      * Proyecto constructor.
      */
@@ -269,6 +276,14 @@ class Proyecto
         $this->equipo->add($persona);
     }
 
+    /**
+     * @param $persona
+     */
+    public function addMessage(Mensaje $mensaje)
+    {
+        $this->getMensajes()->add($mensaje);
+    }
+
 
 
     /**
@@ -318,4 +333,25 @@ class Proyecto
     {
         $this->equipo->removeElement($equipo);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMensajes()
+    {
+        return $this->mensajes;
+    }
+
+    /**
+     * @param mixed $mensajes
+     */
+    public function setMensajes($mensajes)
+    {
+        $this->mensajes = $mensajes;
+    }
+
+
+
+
+
 }

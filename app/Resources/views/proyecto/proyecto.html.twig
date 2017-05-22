@@ -20,7 +20,7 @@
                 <a class="nav-link" data-toggle="tab" href="#equipo" role="tab">Equipo</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#calendario" role="tab">Calendario</a>
+                <a class="nav-link" data-toggle="tab" href="#mensajes" role="tab">Mensajes</a>
             </li>
         </ul>
         <div class = "jumbotron" style="padding: 7%;">
@@ -29,9 +29,15 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="documentos" role="tabpanel">
-
+                    <h2>Documentos<a class="margen-iz" href="#"><button > Subir documentos </button></a></h2>
+                    <hr>
+                    {% if true %}
+                        <h4>No hay documentos asociados a este proyecto.</h4>
+                    {% endif %}
                 </div>
                 <div class="tab-pane" id="descripcion" role="tabpanel">
+                    <h2>Descripción</h2>
+                    <hr>
                     <p>Nombre: {{ proyecto.nombre }}</p>
                     <p>Descripción: {{ proyecto.descripcion }}</p>
                     <p>Categoria: {{ proyecto.categoria }}</p>
@@ -49,7 +55,6 @@
                                         {% if tarea.completada %}
                                             checked
                                         {% endif %}
-
                                 />
                             </div>
                             <div class="col-sm-11">
@@ -87,7 +92,35 @@
                     </div>
                     {% endfor %}
                 </div>
-                <div class="tab-pane" id="calendario" role="tabpanel">{% include 'ADesignsCalendarBundle::calendar.html.twig' %}</div>
+                <div class="tab-pane" id="mensajes" role="tabpanel">
+                    <h2>Mensajes
+                        <a class="margen-iz" href="{{ path('app_proyecto_addMessage', {'id': proyecto.id}) }}">
+                            <button> Comentar </button>
+                        </a>
+                    </h2>
+
+
+
+
+                    <hr>
+
+                    {% if proyecto.mensajes|length == 0 %}
+                        <h4>No hay mensajes,se el primero en comentar...</h4>
+                    {% else %}
+                        {% for mensaje in proyecto.mensajes %}
+                            <div style="padding:2%;background-color:#f5f5f5">
+                                <a href="{{ path('app_proyecto_borrarMensaje', {'id': mensaje.id,'projectid': mensaje.proyecto.id}) }}" style="float:right" type="text" class="deletecoment glyphicon glyphicon-remove"></a>
+                                <a href="{{ path('app_perfil_mostrar', {'id': mensaje.autorMensaje.id}) }}"><img src="{{ asset('images/perfil.png') }}" height="35px" width="35px"></a>
+
+                                    <a href="{{ path('app_perfil_mostrar', {'id': mensaje.autorMensaje.id}) }}">
+                                        <strong>{{mensaje.autorMensaje.username}}</strong>
+                                    </a>
+                                    <span style="margin: 1%;">  {{ mensaje.contenido }}</span>
+
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 <hr/>
                 {% if false %}
                 <div style="float:right">
