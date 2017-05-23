@@ -9,7 +9,10 @@
 p{
     font-size: 1.5em !important;
 }
-
+.wrap{
+    word-break: break-all;
+    word-wrap: break-word;
+}
 .margin-bottom-xs {
     margin-bottom: 5px;
 }

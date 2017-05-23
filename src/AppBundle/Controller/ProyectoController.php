@@ -126,13 +126,36 @@ class ProyectoController extends Controller
     /**
      * @Route("/mostrar/{id}", name="app_proyecto_mostrar")
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
         $m = $this->getDoctrine()->getManager();
         $repository= $m->getRepository('AppBundle:Proyecto');
         $p=$repository->find($id);
+        $mensaje= new Mensaje();
+
+        $user=$this->get('security.token_storage')->getToken()->getUser();
+        $mensaje->setAutorMensaje($user);
+
+        $mensaje->setProyecto($p);
+        $form = $this->createForm(MensajeType::class,$mensaje);
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $m = $this->getDoctrine()->getManager();
+
+            $m->persist($mensaje);
+            $m->flush();
+            return $this ->redirectToRoute('app_proyecto_mostrar',['id' => $id]);
+
+        }
+
+
         return $this->render(':proyecto:proyecto.html.twig', [
             'proyecto'   => $p,
+            'contactosdelUsuario' => $user->getMisContactos(),
+            'form' => $form->createView(),
         ]);
     }
 
