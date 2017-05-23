@@ -54,7 +54,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <div class="navbar-form navbar-right">
-                    {{ render_esi(controller('UserBundle:HoritzontalLogin:horitzontalLogin', {'route': app.request.get('_route')})) }}
+                    <a syle="float:rigth" class="btn btn-danger" href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Cerrar sessión</a>
                 </div>
             </ul>
         </div><!-- /.navbar-collapse -->

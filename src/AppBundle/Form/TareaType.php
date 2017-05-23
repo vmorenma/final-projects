@@ -23,14 +23,6 @@ class TareaType extends AbstractType
             ->add('coste', NumberType::class)
             ->add('startDate', DateType::class)
             ->add('endDate', DateType::class)
-            ->add('assignado', ChoiceType::class, array(
-            'choices'  => array(
-                'Maybe' => null,
-                'Yes' => true,
-                'No' => false,
-                )
-            ))
-
         ;
 
     }
