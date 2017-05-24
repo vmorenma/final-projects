@@ -27,13 +27,13 @@ $(window).scroll(function(){
 });
 
 $(function(){
-    $('#listadecontactos').hide();
+    $('.listaContactos').hide();
     $('.contactadded').click(function(){
         $(this).children().removeClass('glyphicon-plus-sign').addClass('glyphicon-ok-sign');
-        $(this).attr('dissabled',true);
     });
-    $('.mostrarcontactos' ).click(function() {
-        $('.listadecontactos').slideToggle();
+
+    $('#mostrarcontactos' ).click(function() {
+        $('.listaContactos').slideToggle();
     });
 });
 
