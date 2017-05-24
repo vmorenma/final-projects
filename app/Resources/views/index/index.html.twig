@@ -2,22 +2,15 @@
 <html lang="en">
 
 <head>
-
-    <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8">
     <title>Himalaya Project</title>
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
+    <script src= "js/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
 
 </head>
 
@@ -25,7 +18,7 @@
 
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<header class="hiker-box">
+<header class="hiker-box hidden-xs">
     <div class="logo"></div>
     <div class="fore-hiker"></div>
 </header>
@@ -42,8 +35,8 @@
                 Con multitud de funciones esta herramienta és la solución perfecta que tu negocio necesita.
             </p>
             <hr>
-            <a href="/login"><button class = "btn-primary loginbtn">Iniciar Sesión</button></a>
-            <a  href="/register"><button class = "btn-primary registerbtn">Registro</button></a>
+            <a href="/login"><button class = "loginbtn">Iniciar Sesión</button></a>
+            <a  href="/register"><button class = "registerbtn">Registro</button></a>
         </article>
 
         <div class="product-blocks row">
@@ -165,7 +158,7 @@
 
 <!--Scripts-->
 
-<script src= "js/jquery.min.js"></script>
+
 <script src="js/functions.js"></script>
 <!-- End Document
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->

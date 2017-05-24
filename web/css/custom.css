@@ -9,6 +9,9 @@
 p{
     font-size: 1.5em !important;
 }
+.contactos{
+    padding:2%;
+}
 .wrap{
     word-break: break-all;
     word-wrap: break-word;

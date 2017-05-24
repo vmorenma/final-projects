@@ -7,20 +7,35 @@
     <div class="col-sm-offset-1 col-sm-10">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#documentos" role="tab">Documentos</a>
+            <li class="nav-item active">
+                <a class="nav-link " data-toggle="tab" href="#documentos" role="tab">
+                    <span class="hidden-xs hidden-sm">Documentos</span>
+                    <span class="glyphicon glyphicon-file hidden-md hidden-lg "></span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#descripcion" role="tab">Descripción</a>
+                <a class="nav-link " data-toggle="tab" href="#descripcion" role="tab">
+                    <span class="hidden-xs hidden-sm">Descripción</span>
+                    <span class="glyphicon glyphicon-blackboard hidden-md hidden-lg "></span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tareas" role="tab">Tareas</a>
+                <a class="nav-link" data-toggle="tab" href="#tareas" role="tab">
+                    <span class="hidden-xs hidden-sm">Tareas</span>
+                    <span class="glyphicon glyphicon-bullhorn hidden-md hidden-lg "></span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#equipo" role="tab">Equipo</a>
+                <a class="nav-link" data-toggle="tab" href="#equipo" role="tab">
+                    <span class="hidden-xs hidden-sm">Equipo</span>
+                    <span class="glyphicon glyphicon-user hidden-md hidden-lg "></span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#mensajes" role="tab">Mensajes</a>
+                <a class="nav-link" data-toggle="tab" href="#mensajes" role="tab">
+                    <span class="hidden-xs hidden-sm">Mensajes</span>
+                    <span class="glyphicon glyphicon-inbox hidden-md hidden-lg "></span>
+                </a>
             </li>
         </ul>
         <div class = "jumbotron" style="padding: 7%;">
@@ -78,15 +93,22 @@
                 </div>
 
                 <div class="tab-pane" id="equipo" role="tabpanel">
-                    <h2>Equipo<a class="margen-iz" href="#"><button>Añadir <span class="hidden-xs">persona</span></button></a></h2>
-                    <h5>Añade gente al equipo de tu lista de contactos.</h5>
-                    <select>
-                        <option></option>
+                    <h2>Equipo</h2>
+                    <h5>Añade gente al equipo de tu lista de contactos.<button id="mostrarcontactos">Mostrar</button></h5>
+                    <div class="listaContactos">
                         {% for persona in contactosdelUsuario %}
-                            <option value"{{ persona.id }}">{{ persona.username }}</option>
+                            <div class="col-xs-8">
+                                {{ persona.id }}-{{ persona.username }}
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#">
+                                    <button class="contactadded"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                </a>
+                            </div>
                         {% endfor %}
-                    </select>
-                    <button>Añadir</button>
+                    </div>
+                    <br>
+
                     {% for persona in proyecto.equipo %}
                     <div style="padding:5px;margin: 10px; background-color:#f5f5f5">
                         <a style="float:right" type="text" class="deletecoment glyphicon glyphicon-remove"></a>

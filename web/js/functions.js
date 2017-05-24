@@ -26,6 +26,17 @@ $(window).scroll(function(){
 
 });
 
+$(function(){
+    $('#listadecontactos').hide();
+    $('.contactadded').click(function(){
+        $(this).children().removeClass('glyphicon-plus-sign').addClass('glyphicon-ok-sign');
+        $(this).attr('dissabled',true);
+    });
+    $('.mostrarcontactos' ).click(function() {
+        $('.listadecontactos').slideToggle();
+    });
+});
+
 
 
 
