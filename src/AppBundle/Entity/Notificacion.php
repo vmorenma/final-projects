@@ -34,6 +34,7 @@ class Notificacion
      */
     private $nota;
 
+
     /**
      * @var \DateTime
      *
@@ -59,10 +60,17 @@ class Notificacion
     private $target;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Proyecto", inversedBy="notificaciones")
+     */
+    private $proyecto;
+
+    /**
      * Notificacion constructor.
      */
     public function __construct()
     {
+        $this->nota="";
+
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
     }
@@ -196,6 +204,22 @@ class Notificacion
     public function setNota($nota)
     {
         $this->nota = $nota;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProyecto()
+    {
+        return $this->proyecto;
+    }
+
+    /**
+     * @param mixed $proyecto
+     */
+    public function setProyecto($proyecto)
+    {
+        $this->proyecto = $proyecto;
     }
 
 

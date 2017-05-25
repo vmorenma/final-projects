@@ -12,6 +12,13 @@
                 <div style="padding: 8px" class="col-sm-3 col-sm-offset-1">
                     Tarea: {{ tarea.nombre}}
                     <br>
+                    Assignado:
+                    {% if tarea.assignado %}
+                        {{ tarea.assignado.nombre }}
+                    {% else %}
+                        no
+                    {% endif  %}
+                    <br>
                     Completada:
                     {% if tarea.completada %}
                         <input type="checkbox" checked/>

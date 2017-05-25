@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -45,7 +44,6 @@
             <a class="navbar-brand" href="{{ path('app_index_index') }}">Symfony Project</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li></li>
@@ -54,10 +52,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <div class="navbar-form navbar-right">
+                    <a syle="float:rigth" class="btn btn-primary" href="{{ path('app_perfil_index') }}"><span class="glyphicon glyphicon-user"></span> {{ app.user.username }}</a>
                     <a syle="float:rigth" class="btn btn-danger" href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Cerrar sessión</a>
                 </div>
             </ul>
-        </div><!-- /.navbar-collapse -->
+        </div>
 
     </div>
 </nav>
@@ -98,7 +97,7 @@
                             </a>
                         </li>
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use AppBundle\Entity\Mensaje;
 use AppBundle\Form\MensajeType;
 use AppBundle\Form\ProyectoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Notificacion;
 use AppBundle\Entity\Proyecto;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -160,40 +161,38 @@ class ProyectoController extends Controller
     }
 
     /**
-     * @Route("/addMessage/{id}", name="app_proyecto_addMessage")
+     * @Route("/notificacion-equipo/{id}/{projectid}", name="app_proyecto_notificacion_equipo")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function addMessageAction($id, Request $request)
+    public function addtoTeamNotificationAction($id,$projectid,Request $request)
     {
+        $team_noti =  new Notificacion();
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-        $mensaje = new Mensaje();
 
-        $user=$this->get('security.token_storage')->getToken()->getUser();
-        $mensaje->setAutorMensaje($user);
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
+        //set creador
+        $team_noti->setSender($user);
+
+        //set target
         $m = $this->getDoctrine()->getManager();
-        $repository = $m->getRepository('AppBundle:Proyecto');
-        $p= $repository ->find($id);
+        $repositorio =$m->getRepository('UserBundle:User');
+        $repositorio_proyecto =$m->getRepository('AppBundle:Proyecto');
+        $target_user= $repositorio->find($id);
+        $proyecto= $repositorio_proyecto->find($projectid);
+        $team_noti->setTarget($target_user);
 
-        $mensaje->setProyecto($p);
+        //set motivo
+        $team_noti->setMotivo(3);
 
-        $form = $this->createForm(MensajeType::class,$mensaje);
-        $form->handleRequest($request);
-        if($form->isValid()){
-            $m = $this->getDoctrine()->getManager();
-
-            $m->persist($mensaje);
-            $m->flush();
-            return $this ->redirectToRoute('app_proyecto_mostrar',['id' => $id]);
-
-        }
-        return $this->render('mensaje/form.html.twig',
-            [
-                'form' =>$form->createView(),
-                'action' => $this->generateUrl('app_proyecto_addMessage',['id'=> $id])
-            ]
-        );
+        //set proyecto
+        $team_noti->setProyecto($proyecto);
+        $m = $this->getDoctrine()->getManager();
+        $m->persist($team_noti);
+        $m->flush();
+        return $this ->redirectToRoute('app_proyecto_mostrar',['id'=>$projectid]);
     }
 
     /**
@@ -220,7 +219,35 @@ class ProyectoController extends Controller
 
         return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$projectid]);
     }
+    /**
+     * @Route("/borrar-contacto/{id}", name="app_proyecto_borrarContacto")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function borrarContactoAction($id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('UserBundle:User');
+        $contactoaEliminar = $repo->find($id);
+
+        $user->getMisContactos()->removeElement($contactoaEliminar);
+        $user->getContactosConmigo()->removeElement($contactoaEliminar);
+
+        //$creator= $planificacion->getCreador().$id;
+        //$current = $this->getUser().$id;
+        //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+        //    throw $this->createAccessDeniedException();
+        //}
+        $m->persist($contactoaEliminar);
+        $m->persist($user);
+        $m->flush();
+
+        return $this->redirectToRoute('app_perfil_index');
+    }
 
 
 

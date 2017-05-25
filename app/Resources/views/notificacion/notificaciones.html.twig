@@ -11,17 +11,18 @@
         {% else %}
 
             {% for n in notificaciones %}
-                <div class="media-left media-middle">
-                    <a href="{{ path('app_perfil_mostrar', {'id': n.sender.id}) }}">
-                        <img class="media-object" height="150px" width="150px" src="{{ asset('images/perfil.png') }}" alt="foto_perfil">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">{{ n.sender }}</h4>
-                    <p>Nota: <br>{{ n.nota }}</p>
-                </div>
+
 
                 {% if n.motivo == 1 %}
+                    <div class="media-left media-middle">
+                        <a href="{{ path('app_perfil_mostrar', {'id': n.sender.id}) }}">
+                            <img class="media-object" height="150px" width="150px" src="{{ asset('images/perfil.png') }}" alt="foto_perfil">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ n.sender }}</h4>
+                        <p>Nota: <br>{{ n.nota }}</p>
+                    </div>
                     <div style="float:right">
                         <a href="{{ path('app_notificacion_aceptar', {'id': n.id}) }}"><button>Aceptar</button></a>
 
@@ -29,7 +30,34 @@
                             <button>Rechazar</button>
                         </a>
                     </div>
+                {% elseif n.motivo == 3 %}
+                    <div class="media-left media-middle">
+                        <a href="{{ path('app_perfil_mostrar', {'id': n.sender.id}) }}">
+                            <img class="media-object" height="150px" width="150px" src="{{ asset('images/perfil.png') }}" alt="foto_perfil">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ n.sender }}</h4>
+                        <p>Nota: <br>{{ n.sender }} quiere que te unas al proyecto: {{ n.proyecto.nombre }}</p>
+                    </div>
+                    <div style="float:right">
+                        <a href="{{ path('app_notificacion_equipo_aceptar', {'id': n.id}) }}"><button>Aceptar</button></a>
+
+                        <a href="{{ path('app_notificacion_borrar', {'id': n.id}) }}">
+                            <button>Rechazar</button>
+                        </a>
+                    </div>
+
                 {% else %}
+                    <div class="media-left media-middle">
+                        <a href="{{ path('app_perfil_mostrar', {'id': n.sender.id}) }}">
+                            <img class="media-object" height="150px" width="150px" src="{{ asset('images/perfil.png') }}" alt="foto_perfil">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ n.sender }}</h4>
+                        <p>Nota: <br>{{ n.nota }}</p>
+                    </div>
                     <a href="{{ path('app_notificacion_borrar', {'id': n.id}) }}">
                         <button> Entendido!</button>
                     </a>

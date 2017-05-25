@@ -88,6 +88,41 @@ class NotificacionController extends Controller
         //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
         //    throw $this->createAccessDeniedException();
         //}
+        $m->persist($sender);
+        $m->persist($target);
+        $m->remove($notificacion);
+        $m->flush();
+
+        return $this->redirectToRoute('app_notificacion_index');
+    }
+    /**
+     * @Route("/acceptarequipo/{id}", name="app_notificacion_equipo_aceptar")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function aceptarEquipoAction($id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('AppBundle:Notificacion');
+        $notificacion = $repo->find($id);
+        $proyecto= $notificacion->getProyecto();
+        $target=$notificacion->getTarget();
+
+        //añadimos al equipo al objetivo
+        $target->addToProyectos($proyecto);
+        $proyecto->addEquipo($target);
+
+
+        $creator= $proyecto->getAutor();
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
+        $m->persist($target);
+        $m->persist($proyecto);
         $m->remove($notificacion);
         $m->flush();
 

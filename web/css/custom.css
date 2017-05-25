@@ -173,3 +173,7 @@ form {
     height:30px !important;
     margin-top: 60%;
 }
+
+.minht{
+    min-height: 300px !important;
+}

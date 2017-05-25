@@ -93,33 +93,41 @@
                 </div>
 
                 <div class="tab-pane" id="equipo" role="tabpanel">
-                    <h2>Equipo</h2>
+                    {% if (app.user == proyecto.autor) %}
                     <h5>Añade gente al equipo de tu lista de contactos.<button id="mostrarcontactos">Mostrar</button></h5>
-                    <div class="listaContactos">
-                        {% for persona in contactosdelUsuario %}
-                            <div class="col-xs-8">
-                                {{ persona.id }}-{{ persona.username }}
+                    {% endif %}
+                        <div class="listaContactos panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Lista de contactos</h3>
                             </div>
-                            <div class="col-xs-4">
-                                <a href="#">
-                                    <button class="contactadded"><span class="glyphicon glyphicon-plus-sign"></span></button>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <br>
+                            {% for persona in contactosdelUsuario %}
+                                {% if persona not in proyecto.equipo %}
+                                <div class="panel-body">
+                                    <div class="col-xs-10">
+                                        <p><small>Nombre de usuario:</small> {{ persona.username }}</p>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a href="{{ path('app_proyecto_notificacion_equipo', {'id': persona.id, 'projectid': proyecto.id}) }}">
+                                            <button class="contactadded"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endif %}
 
+                            {% endfor %}
+                        </div>
+                    <h2>Equipo</h2>
                     {% for persona in proyecto.equipo %}
-                    <div style="padding:5px;margin: 10px; background-color:#f5f5f5">
-                        <a style="float:right" type="text" class="deletecoment glyphicon glyphicon-remove"></a>
-                        <a href="{{ path('app_perfil_mostrar', {'id': persona.id}) }}"><img src="{{ asset('images/perfil.png') }}" height="28px" width="28px"></a>
-                        <a href="{{ path('app_perfil_mostrar', {'id': persona.id}) }}">
-                            <strong>{{persona.username}}</strong>
-                        </a>
-                        <span style="margin-left: 5%">Numero de tareas assignadas: 0</span>
-                        <span style="margin-left: 5%">Coste de las tareas assignadas: 0</span>
-                        <br />
-                    </div>
+                        <div style="padding:5px;margin: 10px; background-color:#f5f5f5">
+                            <a style="float:right" type="text" class="deletecoment glyphicon glyphicon-remove"></a>
+                            <a href="{{ path('app_perfil_mostrar', {'id': persona.id}) }}"><img src="{{ asset('images/perfil.png') }}" height="28px" width="28px"></a>
+                            <a href="{{ path('app_perfil_mostrar', {'id': persona.id}) }}">
+                                <strong>{{persona.username}}</strong>
+                            </a>
+                            <span style="margin-left: 5%">Numero de tareas assignadas: 0</span>
+                            <span style="margin-left: 5%">Coste de las tareas assignadas: 0</span>
+                            <br />
+                        </div>
                     {% endfor %}
                 </div>
                 <div class="tab-pane" id="mensajes" role="tabpanel">

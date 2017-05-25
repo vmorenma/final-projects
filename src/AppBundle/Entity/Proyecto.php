@@ -77,6 +77,11 @@ class Proyecto
     private $mensajes;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notificacion", mappedBy="proyecto", cascade={"remove"})
+     */
+    private $notificaciones;
+
+    /**
      * Proyecto constructor.
      */
 
@@ -349,9 +354,5 @@ class Proyecto
     {
         $this->mensajes = $mensajes;
     }
-
-
-
-
 
 }
