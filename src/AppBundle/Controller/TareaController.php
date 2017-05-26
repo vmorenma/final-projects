@@ -6,11 +6,13 @@ use ADesigns\CalendarBundle\Entity\EventEntity;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
 use AppBundle\AppBundle;
 use AppBundle\Entity\Image;
+use AppBundle\Entity\Notificacion;
 use AppBundle\Entity\Proyecto;
 use AppBundle\Entity\Tarea;
 use AppBundle\EventListener\CalendarEventListener;
 use AppBundle\Form\ImageType;
 use AppBundle\Form\TareaType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,9 +28,8 @@ class TareaController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-        $m = $this->getDoctrine()->getManager();
-        $repo=$m->getRepository('AppBundle:Tarea');
-        $tareas = $repo->findAll();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $tareas = $user->getTareasassignadas();
 
 
         return $this->render(':tarea:tareas.html.twig',
@@ -91,5 +92,106 @@ class TareaController extends Controller
         $m->flush();
 
         return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$idproyecto]);
+    }
+    /**
+     * @Route ("/completar/{id}", name="app_tarea_completar")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function completarAction($id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $m=$this->getDoctrine()->getManager();
+        $repo = $m->getRepository('AppBundle:Tarea');
+        $tarea = $repo->find($id);
+
+        $tarea->setCompletada(!($tarea->getCompletada()));
+        $m->persist($tarea);
+        $m->flush();
+        return $this->redirectToRoute('app_tarea_index');
+
+    }
+    /**
+     * @Route ("/asignar/{id}/{tareaid}", name="app_tarea_asignar")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function asignarAction($id, $tareaid)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $sender = $this->get('security.token_storage')->getToken()->getUser();
+
+
+
+        $m= $this->getDoctrine()->getManager();
+        $repo =$m->getRepository('UserBundle:User');
+        $repo_tareas= $m->getRepository('AppBundle:Tarea');
+        $tarea =$repo_tareas->find($tareaid);
+        $user=$repo->find($id);
+        $proyecto=$tarea->getProyecto();
+
+        $array_asignado = $tarea->getAssignado();
+        $array_tareas = $user->getTareasassignadas();
+
+        //añadir a asignado y tareasasignadas
+        $array_asignado->add($user);
+        $array_tareas->add($tarea);
+
+        //asignar a tarea
+        $tarea->setAssignado($array_asignado);
+        $user->setTareasassignadas($array_tareas);
+
+        //crear notificacion
+
+        $add_noti= new Notificacion();
+        $add_noti->setMotivo(4);
+        $add_noti->setSender($sender);
+        $add_noti->setTarget($user);
+        $add_noti->setProyecto($proyecto);
+
+        $m->persist($add_noti);
+        $m->persist($tarea);
+        $m->persist($user);
+        $m->flush();
+        return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$proyecto->getId()]);
+    }
+    /**
+     * @Route ("/borrarasignado/{id}/{tareaid}", name="app_tarea_borrarasignado")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function borrarAsignadoAction($id, $tareaid)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+        $sender = $this->get('security.token_storage')->getToken()->getUser();
+
+
+
+        $m= $this->getDoctrine()->getManager();
+        $repo =$m->getRepository('UserBundle:User');
+        $repo_tareas= $m->getRepository('AppBundle:Tarea');
+        $tarea =$repo_tareas->find($tareaid);
+        $user=$repo->find($id);
+        $proyecto=$tarea->getProyecto();
+
+        $array_asignado = $tarea->getAssignado();
+        $array_tareas = $user->getTareasassignadas();
+
+        //añadir a asignado y tareasasignadas
+        $array_asignado->removeElement($user);
+        $array_tareas->removeElement($tarea);
+
+        //asignar a tarea
+        $tarea->setAssignado($array_asignado);
+        $user->setTareasassignadas($array_tareas);
+
+        $m->persist($tarea);
+        $m->persist($user);
+        $m->flush();
+        return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$proyecto->getId()]);
     }
 }

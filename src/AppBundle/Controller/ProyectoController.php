@@ -22,13 +22,12 @@ class ProyectoController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-        $m = $this->getDoctrine()->getManager();
-        $repo = $m->getRepository('AppBundle:Proyecto');
-        $proyectos = $repo->findAll();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $pjt= $user->getProyectos();
 
         return $this->render(':proyecto:proyectos.html.twig',
             [
-                'proyectos' => $proyectos,
+                'proyectos' => $pjt,
             ]
         );
     }
@@ -236,6 +235,9 @@ class ProyectoController extends Controller
 
         $user->getMisContactos()->removeElement($contactoaEliminar);
         $user->getContactosConmigo()->removeElement($contactoaEliminar);
+
+        $contactoaEliminar->getMisContactos()->removeElement($user);
+        $contactoaEliminar->getContactosConmigo()->removeElement($user);
 
         //$creator= $planificacion->getCreador().$id;
         //$current = $this->getUser().$id;

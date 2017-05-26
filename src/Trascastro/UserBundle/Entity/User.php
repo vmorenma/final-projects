@@ -45,6 +45,13 @@ class User extends BaseUser
     private $updatedAt;
 
     /**
+     * @var  string
+     *
+     * @ORM\Column(name="picture", type="string", length=255))
+     */
+    private $picture;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proyecto",mappedBy="autor")
      */
 
@@ -56,7 +63,7 @@ class User extends BaseUser
     private $mensajesCreados;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="assignado")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="assignado")
      */
     private $tareasassignadas;
 
@@ -98,8 +105,10 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->contactosConmigo = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->misContactos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->picture='perfil.png';
+        $this->contactosConmigo = new ArrayCollection();
+        $this->misContactos = new ArrayCollection();
+        $this->tareasassignadas= new ArrayCollection();
         $this->createdAt    = new \DateTime();
         $this->updatedAt    = $this->createdAt;
     }
@@ -278,6 +287,23 @@ class User extends BaseUser
     {
         $this->mensajesCreados = $mensajesCreados;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
+
 
 
 

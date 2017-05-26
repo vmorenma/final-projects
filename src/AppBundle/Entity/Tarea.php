@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,7 +64,7 @@ class Tarea
     private $completada;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="tareasassignadas")
+     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="tareasassignadas")
      */
     private $assignado;
 
@@ -97,6 +98,7 @@ class Tarea
     public function __construct()
     {
         $this->completada = false;
+        $this->assignado = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 

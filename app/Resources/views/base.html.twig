@@ -25,7 +25,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
-    <script src="{{ asset('js/functions.js') }}"></script>
+    <script src="{{ asset('js/tabs-functions.js') }}"></script>
 
 
     <![endif]-->
@@ -45,11 +45,6 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li></li>
-                <li></li>
-            </ul>
-
             <ul class="nav navbar-nav navbar-right">
                 <div class="navbar-form navbar-right">
                     <a syle="float:rigth" class="btn btn-primary" href="{{ path('app_perfil_index') }}"><span class="glyphicon glyphicon-user"></span> {{ app.user.username }}</a>
@@ -96,6 +91,7 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="menu-item"><a syle="float:rigth" class="hidden-sm hidden-md hidden-lg" href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span></a></li>
                     </ul>
                 </div>
             </div>

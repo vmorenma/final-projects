@@ -12,6 +12,8 @@
 
             {% for n in notificaciones %}
 
+                <div class="container-fluid notificacion">
+
 
                 {% if n.motivo == 1 %}
                     <div class="media-left media-middle">
@@ -47,6 +49,21 @@
                             <button>Rechazar</button>
                         </a>
                     </div>
+                {% elseif n.motivo == 4 %}
+                    <div class="media-left media-middle">
+                        <a href="{{ path('app_perfil_mostrar', {'id': n.sender.id}) }}">
+                            <img class="media-object" height="150px" width="150px" src="{{ asset('images/perfil.png') }}" alt="foto_perfil">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ n.sender }}</h4>
+                        <p>Nota: <br>{{ n.sender }} te ha asignado una tarea del proyecto: {{ n.proyecto.nombre }}</p>
+                    </div>
+                    <div style="float:right">
+                        <a href="{{ path('app_notificacion_borrar', {'id': n.id}) }}">
+                            <button> Entendido!</button>
+                        </a>
+                    </div>
 
                 {% else %}
                     <div class="media-left media-middle">
@@ -63,6 +80,7 @@
                     </a>
 
                 {% endif %}
+                </div>
 
             {% endfor %}
         {% endif %}
