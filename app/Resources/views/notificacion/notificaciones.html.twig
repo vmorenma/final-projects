@@ -13,8 +13,6 @@
             {% for n in notificaciones %}
 
                 <div class="container-fluid notificacion">
-
-
                 {% if n.motivo == 1 %}
                     <div class="media-left media-middle">
                         <a href="{{ path('app_perfil_mostrar', {'id': n.sender.id}) }}">
@@ -72,12 +70,16 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">{{ n.sender }}</h4>
+                        <h4 class="media-heading">{{ n.sender }} te ha enviado una notificación.</h4>
                         <p>Nota: <br>{{ n.nota }}</p>
+
                     </div>
-                    <a href="{{ path('app_notificacion_borrar', {'id': n.id}) }}">
-                        <button> Entendido!</button>
-                    </a>
+                    <div style="float:right">
+                        <a href="{{ path('app_notificacion_borrar', {'id': n.id}) }}">
+                            <button> Entendido!</button>
+                        </a>
+                    </div>
+
 
                 {% endif %}
                 </div>

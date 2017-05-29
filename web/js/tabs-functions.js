@@ -7,4 +7,13 @@ $(function(){
     $('#mostrarcontactos' ).click(function() {
         $('.listaContactos').slideToggle();
     });
+
+    $('#buscarform input').submit(function(e)
+    {
+        if( !$(this).val() ) {
+            e.preventDefault();
+            $(this).parents('p').addClass('warning');
+        }
+    });
 });
+

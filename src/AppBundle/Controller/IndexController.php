@@ -53,6 +53,9 @@ class IndexController extends Controller
     public function searchAction(Request $request)
     {
         $busqueda = $_POST['busqueda'];
+        if ($busqueda==''){
+            return $this->redirectToRoute('app_index_index');
+        }
         return $this->redirectToRoute('app_index_busqueda_show', ['palabra' => $busqueda]);
     }
     /**

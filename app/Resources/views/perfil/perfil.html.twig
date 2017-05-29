@@ -143,9 +143,9 @@
                     <div class="tab-pane margen-iz" id="mensajes" role="tabpanel">
                         <h3 style="text-align: left">Mensajes</h3>
                         <hr>
-                        {% if true %}
-                            <h2>Ningún mensaje.</h2>
-                        {% endif %}
+                        <p>Enviar notificación a este usuario.</p>
+                        <a href="{{ path('app_perfil_mensaje', {'id': usuario.id}) }}"> <button> Enviar </button></a>
+
                     </div>
                 </div>
             </div>
