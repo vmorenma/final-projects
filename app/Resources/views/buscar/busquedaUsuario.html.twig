@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="col-xs-12">
+            <h1>Usuarios</h1>
+        </div>
+
+    </div>
+    <div class="container-fluid container-margin">
+
+        {% if usuarios|length == 0 %}
+            <p>No hay usuarios con este nombre de usuarios actualmente.</p>
+        {% endif %}
+
+        {% for persona in usuarios %}
+
+                <div class="col-xs-12" style="margin:2%;float:right;padding:2%;background-color:#f5f5f5">
+                    <a href="{{ path('app_perfil_mostrar', {'id': persona.id}) }}"><img src="{{ asset('images/perfil.png') }}" height="35px" width="35px"></a>
+                    <a href="{{ path('app_perfil_mostrar', {'id': persona.id}) }}">
+                        <strong>{{persona.username}}</strong>
+                    </a>
+
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}

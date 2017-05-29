@@ -25,4 +25,12 @@
             </div>
         {% endfor %}
     </div>
+    {% if not doPagination is defined %}
+        <div class="navigation col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10 ">
+            <div class=" col-lg-5 col-md-6 col-sm-7 col-sm-offset-4 col-xs-offset-1 col-xs-11 ">
+                {{ knp_pagination_render(proyectos) }}
+            </div>
+        </div>
+
+    {% endif %}
 {% endblock %}

@@ -17,13 +17,23 @@ class ProyectoController extends Controller
      * @Route("/", name="app_proyecto_index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $pjt= $user->getProyectos();
+
+        $paginator = $this->get('knp_paginator');
+        $pjt = $paginator->paginate(
+            $pjt,
+            $request->query->getInt('page', 1),
+            Proyecto::PAGINATION_ITEMS,
+            [
+                'wrap-queries' => true, // https://github.com/KnpLabs/knp-components/blob/master/doc/pager/config.md
+            ]
+        );
 
         return $this->render(':proyecto:proyectos.html.twig',
             [

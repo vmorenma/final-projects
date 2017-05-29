@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Proyecto
 {
+    const PAGINATION_ITEMS = 3;
     /**
      * @var int
      *

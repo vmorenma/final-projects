@@ -45,4 +45,28 @@ class IndexController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/buscarUsuario", name="app_index_buscarUsuario")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchAction(Request $request)
+    {
+        $busqueda = $_POST['busqueda'];
+        return $this->redirectToRoute('app_index_busqueda_show', ['palabra' => $busqueda]);
+    }
+    /**
+     * @Route("/busquedaPorUsuario/{palabra}", name="app_index_busqueda_show")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function textoPalabraAction($palabra, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $usuarios =$em->getRepository('UserBundle:User')->buscarUsuario($palabra);
+        return $this->render(':buscar:busquedaUsuario.html.twig',
+            [
+                'usuarios' => $usuarios,
+            ]
+        );
+    }
 }
