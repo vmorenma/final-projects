@@ -114,13 +114,6 @@ class NotificacionController extends Controller
         //añadimos al equipo al objetivo
         $target->addToProyectos($proyecto);
         $proyecto->addEquipo($target);
-
-
-        $creator= $proyecto->getAutor();
-        $current = $this->getUser().$id;
-        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
-            throw $this->createAccessDeniedException();
-        }
         $m->persist($target);
         $m->persist($proyecto);
         $m->remove($notificacion);

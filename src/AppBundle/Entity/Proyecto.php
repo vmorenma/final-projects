@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Trascastro\UserBundle\Entity\User;
 
 /**
  * Proyecto
@@ -335,7 +336,7 @@ class Proyecto
      *
      * @param \Trascastro\UserBundle\Entity\User $equipo
      */
-    public function removeEquipo(\Trascastro\UserBundle\Entity\User $equipo)
+    public function removeEquipo(User $equipo)
     {
         $this->equipo->removeElement($equipo);
     }
