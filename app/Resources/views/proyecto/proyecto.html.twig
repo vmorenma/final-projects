@@ -50,13 +50,23 @@
                         <h4>No hay documentos asociados a este proyecto.</h4>
                     {% endif %}
                     {% for doc in proyecto.documentos %}
-                        <a href="{{ asset('uploads/brochures/' ~ doc.brochure) }}">
-                            <img src="{{ asset('images/pdf.png') }}" height="100px" width="100px"/>
-                            <p>{{ doc.nombre }} (PDF)</p>
-                        </a>
-                        <a href="{{ path('app_proyecto_borrar_doc', {'id': doc.id}) }}">
+                        <a style="float:right" href="{{ path('app_proyecto_borrar_doc', {'id': doc.id}) }}">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
+                        <a href="{{ asset('uploads/brochures/' ~ doc.brochure) }}">
+                            <div class="container-fluid">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-1">
+                                        <img src="{{ asset('images/pdf.png') }}" height="50px" width="50px"/>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        {{ doc.nombre }} (PDF)
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+
                     {% endfor %}
                 </div>
                 <div class="tab-pane" id="descripcion" role="tabpanel">
