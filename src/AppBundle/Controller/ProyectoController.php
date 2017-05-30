@@ -260,6 +260,31 @@ class ProyectoController extends Controller
 
         return $this->redirectToRoute('app_perfil_index');
     }
+    /**
+     * @Route("/borrarDoc/{id}", name="app_proyecto_borrar_doc")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function borrarActionDocumento($id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('AppBundle:Documento');
+        $doc = $repo->find($id);
+        $proyecto =$doc->getProyecto();
+
+        //$creator= $planificacion->getCreador().$id;
+        //$current = $this->getUser().$id;
+        //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+        //    throw $this->createAccessDeniedException();
+        //}
+        $m->remove($doc);
+        $m->flush();
+
+        return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$proyecto->getId()]);
+    }
 
 
 

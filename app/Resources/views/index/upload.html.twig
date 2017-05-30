@@ -3,7 +3,10 @@
 {% block body %}
     <div class="margen-iz">
         <h1>Upload</h1>
-        {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.nombre) }}
+            {{ form_row(form.brochure) }}
+        {{ form_end(form) }}
     </div>
 
 {% endblock %}

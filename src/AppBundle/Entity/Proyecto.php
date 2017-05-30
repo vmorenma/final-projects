@@ -84,6 +84,12 @@ class Proyecto
     private $notificaciones;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Documento", mappedBy="proyecto", cascade={"remove"})
+     *
+     */
+    private $documentos;
+
+    /**
      * Proyecto constructor.
      */
 
@@ -356,5 +362,22 @@ class Proyecto
     {
         $this->mensajes = $mensajes;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDocumentos()
+    {
+        return $this->documentos;
+    }
+
+    /**
+     * @param mixed $documentos
+     */
+    public function setDocumentos($documentos)
+    {
+        $this->documentos = $documentos;
+    }
+
 
 }

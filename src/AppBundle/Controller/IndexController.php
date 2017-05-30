@@ -2,11 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Image;
-use AppBundle\Form\ImageType;
+use AppBundle\Entity\Documento;
+use AppBundle\Form\DocumentoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class IndexController extends Controller
 {
@@ -22,28 +23,41 @@ class IndexController extends Controller
     }
 
     /**
-     * @Route("/upload", name="app_index_upload")
+     * @Route("/upload/{id}", name="app_index_upload")
      */
-    public function uploadAction(Request $request)
+    public function uploadAction($id,Request $request)
     {
-        $p = new Image();
-        $form = $this->createForm(ImageType::class, $p);
+        $documento = new Documento();
+        $form = $this->createForm(DocumentoType::class, $documento);
+        $form->handleRequest($request);
 
-        if ($request->getMethod() == Request::METHOD_POST) {
-            $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($form->isValid()) {
-                $m = $this->getDoctrine()->getManager();
-                $m->persist($p);
-                $m->flush();
+            $m = $this->getDoctrine()->getManager();
+            $repo = $m->getRepository('AppBundle:Proyecto');
+            $proyecto = $repo->find($id);
 
-                return $this->redirectToRoute('app_index_index');
-            }
+            // $file stores the uploaded PDF file
+            /** @var UploadedFile $file */
+            $file = $documento->getBrochure();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            $file->move(
+                $this->getParameter('brochures_directory'),
+                $fileName
+            );
+
+            $documento->setBrochure($fileName);
+            $documento->setProyecto($proyecto);
+            $m->persist($documento);
+            $m->flush();
+
+            return $this->redirect($this->generateUrl('app_proyecto_mostrar',['id'=> $id]));
         }
 
-        return $this->render(':index:upload.html.twig', [
+        return $this->render('index/upload.html.twig', array(
             'form' => $form->createView(),
-        ]);
+        ));
     }
 
     /**
