@@ -6,7 +6,7 @@
 
         <div class="col-sm-12 col-lg-3">
             <div class="panel panel-default">
-                <div class="panel-thumbnail"><img src="{{ asset('images/perfil.png') }}" style="margin:0 auto" class="img-responsive"></div>
+                <div class="panel-thumbnail"><img alt="foto-perfil" src="{{ asset('images/perfil.png') }}" style="margin:0 auto" class="img-responsive"></div>
                 {% if (app.user.username != usuario.username)  %}
                     {% if not added %}
                         <div style="text-align: center">
@@ -68,7 +68,7 @@
                             {% for proyecto in usuario.proyectosCreados %}
                                 <div class="col-sm-5  thumbnail project-margin" >
                                     <a href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><p style="font-size: 1.5em;padding:2%">{{ proyecto.nombre}}</p></a>
-                                    <a class="thumbnail" href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><img src="{{ asset('images/planificacion_default.jpg') }}"/></a>
+                                    <a class="thumbnail" href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><img alt="foto-proyecto"src="{{ asset('images/planificacion_default.jpg') }}"/></a>
                                     <p class="preview">Descripción: {{ proyecto.descripcion}}</p>
                                     <p>Categoria: {{ proyecto.categoria}}</p>
                                     <p>Autor: <a href="{{ path('app_perfil_mostrar',{'id': proyecto.autor.id}) }}">{{ proyecto.autor}}</a></p>
