@@ -14,8 +14,10 @@
             <div class="col-sm-12 col-md-5 col-lg-3  thumbnail project-margin" >
                 <a href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><p style="font-size: 1.5em;padding:2%">{{ proyecto.nombre}}</p></a>
                 <a class="thumbnail" href="{{ path('app_proyecto_mostrar', {'id': proyecto.id}) }}"><img src="{{ asset('images/planificacion_default.jpg') }}"/></a>
+                {% if (app.user == proyecto.autor) or (app.user.hasRole("ROLE_SUPERADMIN")) %}
                 <a href="{{ path('app_proyecto_editar', {'id': proyecto.id}) }}" class=" top-right-icon btn edit" style="margin-right:15% !important;"> <i class="glyphicon glyphicon-edit"></i></a>
                 <a href="{{ path('app_proyecto_borrar', {'id': proyecto.id}) }}" class=" top-right-icon btn delete"><i class="glyphicon glyphicon-remove"></i></a>
+                {% endif %}
                 <hr>
                 <h5><strong>Información de la planificación: </strong></h5>
                 <hr>

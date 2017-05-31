@@ -86,7 +86,13 @@ class TareaController extends Controller
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Tarea');
         $t = $repo->find($id);
+        $p = $t->getProyecto();
         $idproyecto = $t->getProyecto()->getId();
+        $creator= $p->getAutor().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
 
         $m->remove($t);
         $m->flush();
@@ -123,8 +129,6 @@ class TareaController extends Controller
             throw $this->createAccessDeniedException();
         }
         $sender = $this->get('security.token_storage')->getToken()->getUser();
-
-
 
         $m= $this->getDoctrine()->getManager();
         $repo =$m->getRepository('UserBundle:User');
@@ -177,6 +181,12 @@ class TareaController extends Controller
         $tarea =$repo_tareas->find($tareaid);
         $user=$repo->find($id);
         $proyecto=$tarea->getProyecto();
+
+        $creator= $proyecto->getAutor().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
 
         $array_asignado = $tarea->getAssignado();
         $array_tareas = $user->getTareasassignadas();

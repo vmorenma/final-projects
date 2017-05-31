@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Mensaje;
 use AppBundle\Form\MensajeType;
 use AppBundle\Form\ProyectoType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Notificacion;
 use AppBundle\Entity\Proyecto;
@@ -88,6 +89,11 @@ class ProyectoController extends Controller
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Proyecto');
         $p= $repo->find($id);
+        $creator= $p->getAutor().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
         $form=$this->createForm(ProyectoType::class,$p);
 
         //El producto es actualizado con los estos datos
@@ -123,11 +129,11 @@ class ProyectoController extends Controller
         $repo= $m->getRepository('AppBundle:Proyecto');
         $p = $repo->find($id);
 
-        //$creator= $planificacion->getCreador().$id;
-        //$current = $this->getUser().$id;
-        //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
-        //    throw $this->createAccessDeniedException();
-        //}
+        $creator= $p->getAutor().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
         $m->remove($p);
         $m->flush();
 
@@ -141,12 +147,16 @@ class ProyectoController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
+
+        $user=$this->get('security.token_storage')->getToken()->getUser();
         $m = $this->getDoctrine()->getManager();
         $repository= $m->getRepository('AppBundle:Proyecto');
         $p=$repository->find($id);
+        $equipo= $p->getEquipo();
+        if(!($equipo->contains($user))){
+            throw $this->createAccessDeniedException();
+        }
         $mensaje= new Mensaje();
-
-        $user=$this->get('security.token_storage')->getToken()->getUser();
         $mensaje->setAutorMensaje($user);
 
         $mensaje->setProyecto($p);
@@ -275,11 +285,11 @@ class ProyectoController extends Controller
         $doc = $repo->find($id);
         $proyecto =$doc->getProyecto();
 
-        //$creator= $planificacion->getCreador().$id;
-        //$current = $this->getUser().$id;
-        //if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
-        //    throw $this->createAccessDeniedException();
-        //}
+        $creator= $proyecto->getAutor().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
         $m->remove($doc);
         $m->flush();
 

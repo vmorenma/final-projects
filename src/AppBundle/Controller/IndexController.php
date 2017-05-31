@@ -27,6 +27,9 @@ class IndexController extends Controller
      */
     public function uploadAction($id,Request $request)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
         $documento = new Documento();
         $form = $this->createForm(DocumentoType::class, $documento);
         $form->handleRequest($request);
