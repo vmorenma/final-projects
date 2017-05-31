@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Trascastro\UserBundle\Entity\User;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Proyecto
@@ -27,21 +28,21 @@ class Proyecto
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="Nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="Descripcion", type="text")
      */
     private $descripcion;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="Categoria", type="string", length=255)
      */
     private $categoria;

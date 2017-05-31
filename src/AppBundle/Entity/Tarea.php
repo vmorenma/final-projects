@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tarea
@@ -24,21 +25,21 @@ class Tarea
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="Nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="Descripcion", type="text")
      */
     private $descripcion;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="startDate", type="date")
      */
     private $startDate;
@@ -52,7 +53,7 @@ class Tarea
 
     /**
      * @var int
-     *
+     *@Assert\NotBlank()
      *@ORM\Column(name="coste", type="integer")
      */
     private $coste;

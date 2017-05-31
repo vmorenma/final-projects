@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Mensaje
@@ -31,7 +32,7 @@ class Mensaje
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="likes", type="integer")
      */
     private $likes;

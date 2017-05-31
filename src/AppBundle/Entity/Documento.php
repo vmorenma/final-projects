@@ -12,6 +12,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * Documento
  *
@@ -31,7 +32,7 @@ class Documento
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="Nombre", type="string", length=255)
      */
     private $nombre;
