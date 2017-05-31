@@ -153,7 +153,7 @@ class ProyectoController extends Controller
         $repository= $m->getRepository('AppBundle:Proyecto');
         $p=$repository->find($id);
         $equipo= $p->getEquipo();
-        if(!($equipo->contains($user))){
+        if(!($equipo->contains($user))&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))){
             throw $this->createAccessDeniedException();
         }
         $mensaje= new Mensaje();
@@ -296,7 +296,36 @@ class ProyectoController extends Controller
         return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$proyecto->getId()]);
     }
 
+    /**
+     * @Route ("/borrardelEquipo/{id}/{proyectoid}", name="app_proyecto_borrardelEquipo")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function borrardelEquipoAction($id, $proyectoid)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
 
+        $m= $this->getDoctrine()->getManager();
+        $repo =$m->getRepository('UserBundle:User');
+        $repo_proyectos= $m->getRepository('AppBundle:Proyecto');
+        $proyecto =$repo_proyectos->find($proyectoid);
+        $team_member=$repo->find($id);
+
+        $creator= $proyecto->getAutor().$id;
+        $current = $this->getUser().$id;
+
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
+        $proyecto->removeEquipo($team_member);
+
+        $m->persist($proyecto);
+        $m->persist($team_member);
+
+        $m->flush();
+        return $this->redirectToRoute('app_proyecto_mostrar',['id'=>$proyecto->getId()]);
+    }
 
 
 }
