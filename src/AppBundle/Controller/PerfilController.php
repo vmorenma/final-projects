@@ -92,10 +92,6 @@ class PerfilController extends Controller
         if ($notificacion_enviada){
             return $this ->redirectToRoute('app_perfil_mostrar',['id'=>$id]);
         }
-
-
-
-
         $form = $this->createForm(NotificacionType::class,$friend_noti);
         $form->handleRequest($request);
         if($form->isValid()){
