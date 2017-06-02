@@ -63,9 +63,9 @@ class User extends BaseUser
     private $mensajesCreados;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="assignado")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tarea", mappedBy="asignado")
      */
-    private $tareasassignadas;
+    private $tareasasignadas;
 
     /**
      * @ORM\ManyToMany (targetEntity="AppBundle\Entity\Proyecto", inversedBy="equipo")
@@ -108,7 +108,7 @@ class User extends BaseUser
         $this->picture='perfil.png';
         $this->contactosConmigo = new ArrayCollection();
         $this->misContactos = new ArrayCollection();
-        $this->tareasassignadas= new ArrayCollection();
+        $this->tareasasignadas= new ArrayCollection();
         $this->createdAt    = new \DateTime();
         $this->updatedAt    = $this->createdAt;
     }
@@ -175,17 +175,17 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getTareasassignadas()
+    public function getTareasasignadas()
     {
-        return $this->tareasassignadas;
+        return $this->tareasasignadas;
     }
 
     /**
-     * @param mixed $tareasassignadas
+     * @param mixed $tareasasignadas
      */
-    public function setTareasassignadas($tareasassignadas)
+    public function setTareasasignadas($tareasasignadas)
     {
-        $this->tareasassignadas = $tareasassignadas;
+        $this->tareasasignadas = $tareasasignadas;
     }
 
     /**

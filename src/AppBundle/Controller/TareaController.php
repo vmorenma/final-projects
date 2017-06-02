@@ -29,7 +29,7 @@ class TareaController extends Controller
             throw $this->createAccessDeniedException();
         }
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $tareas = $user->getTareasassignadas();
+        $tareas = $user->getTareasasignadas();
 
 
         return $this->render(':tarea:tareas.html.twig',
@@ -137,16 +137,16 @@ class TareaController extends Controller
         $user=$repo->find($id);
         $proyecto=$tarea->getProyecto();
 
-        $array_asignado = $tarea->getAssignado();
-        $array_tareas = $user->getTareasassignadas();
+        $array_asignado = $tarea->getAsignado();
+        $array_tareas = $user->getTareasasignadas();
 
         //añadir a asignado y tareasasignadas
         $array_asignado->add($user);
         $array_tareas->add($tarea);
 
         //asignar a tarea
-        $tarea->setAssignado($array_asignado);
-        $user->setTareasassignadas($array_tareas);
+        $tarea->setAsignado($array_asignado);
+        $user->setTareasasignadas($array_tareas);
 
         //crear notificacion
 
@@ -188,16 +188,16 @@ class TareaController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $array_asignado = $tarea->getAssignado();
-        $array_tareas = $user->getTareasassignadas();
+        $array_asignado = $tarea->getAsignado();
+        $array_tareas = $user->getTareasasignadas();
 
         //añadir a asignado y tareasasignadas
         $array_asignado->removeElement($user);
         $array_tareas->removeElement($tarea);
 
         //asignar a tarea
-        $tarea->setAssignado($array_asignado);
-        $user->setTareasassignadas($array_tareas);
+        $tarea->setAsignado($array_asignado);
+        $user->setTareasasignadas($array_tareas);
 
         $m->persist($tarea);
         $m->persist($user);

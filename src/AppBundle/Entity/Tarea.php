@@ -65,9 +65,9 @@ class Tarea
     private $completada;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="tareasassignadas")
+     * @ORM\ManyToMany(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="tareasasignadas")
      */
-    private $assignado;
+    private $asignado;
 
     /**
      * @var \DateTime
@@ -99,7 +99,7 @@ class Tarea
     public function __construct()
     {
         $this->completada = false;
-        $this->assignado = new ArrayCollection();
+        $this->asignado = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 
@@ -311,17 +311,17 @@ class Tarea
     /**
      * @return mixed
      */
-    public function getAssignado()
+    public function getAsignado()
     {
-        return $this->assignado;
+        return $this->asignado;
     }
 
     /**
-     * @param mixed $assignado
+     * @param mixed $asignado
      */
-    public function setAssignado($assignado)
+    public function setAsignado($asignado)
     {
-        $this->assignado = $assignado;
+        $this->asignado = $asignado;
     }
 
 

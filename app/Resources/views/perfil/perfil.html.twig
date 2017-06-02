@@ -39,7 +39,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#tareas" role="tab">
-                            <span class="hidden-xs hidden-sm">Tareas assignadas</span>
+                            <span class="hidden-xs hidden-sm">Tareas asignadas</span>
                             <span class="glyphicon glyphicon-bullhorn hidden-md hidden-lg "></span>
                         </a>
                     </li>
@@ -80,10 +80,10 @@
                         <div class="container-fluid">
                             <h3 style="text-align: left">Tareas</h3>
                             <hr>
-                            {% if usuario.tareasassignadas|length == 0 %}
+                            {% if usuario.tareasasignadas|length == 0 %}
                                 <h2>Ninguna tarea asignada</h2>
                             {% endif %}
-                            {% for tarea in usuario.tareasassignadas %}
+                            {% for tarea in usuario.tareasasignadas %}
                                 <div id="proyecto" class="container-fluid" style="padding: 10px;;margin: 10px; background-color:#f5f5f5">
                                     <div class="col-sm-12" style="padding: 10px;">
                                         {% if (app.user == tarea.proyecto.autor) or (app.user.hasRole("ROLE_SUPER_ADMIN")) %}
